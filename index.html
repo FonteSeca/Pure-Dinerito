@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visualização de Dados</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <script type="module" src="https://unpkg.com/@supabase/supabase-js@2"></script>
+
+
+
+
+    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    
+
+
+
+</head>
+<body>
+    <aside>
+        <nav>
+            <ul>
+                <li>
+                   
+                        <div className="sidebar-icon">
+                           
+                        </div>
+                        <span>Dashboard</span>
+                   
+                </li>
+            </ul>
+        </nav>
+
+        <hr></hr>
+
+        <nav>
+            <ul>
+                <li>
+                    
+                        <div className="sidebar-icon">
+                            
+                        </div>
+                        Ativos
+                    
+                </li>
+                <li>
+                    
+                        <div className="sidebar-icon">
+                             
+                        </div>
+                        <span>Transação</span>
+                    
+                </li>
+                <li>
+                    
+                        <div className="sidebar-icon">
+                                                
+                        </div>
+                        <span>Dividendo</span>
+                        
+                    
+                </li>
+
+            </ul>
+        </nav>
+
+       
+
+        <nav>
+            <ul>
+                <li>
+                    
+                        <div className="sidebar-icon">                      
+                                                 
+                        </div>
+                        <span>Configuração</span>                    
+                    
+                </li>
+            </ul>
+        </nav>
+
+
+        
+    </aside>
+
+    <h1>Dados da Planilha</h1>
+    <div id="tabela"></div>
+    <h2>Crescimento do Patrimônio</h2>
+    <canvas id="graficoPatrimonio" width="400" height="200"></canvas>
+    <canvas id="graficoTipo" width="400" height="200"></canvas>
+    <canvas id="graficoSegmento" width="400" height="200"></canvas>
+    <canvas id="graficoProventos" width="400" height="200"></canvas>
+
+    <script type="module" src="dados.js"></script>
+    <script type="module" src="script.js"></script>
+</body>
+</html>
+
+
+<style>
+    
+</style>

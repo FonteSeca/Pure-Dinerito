@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <script type="module" src="https://unpkg.com/@supabase/supabase-js@2"></script>
+
+
+
+
+    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="MainContainer">
+    <aside>
+        <nav>
+            <ul>
+                <li>
+                   <a href="/dashboard.html">
+                        <div class="sidebar-icon">
+                           
+                        </div>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    
+        <hr>
+    
+        <nav>
+            <ul>
+                <li>
+                    <a href="/ativos.html">
+                    
+                        <div class="sidebar-icon">
+                            
+                        </div>
+                        Ativos
+                    </a>
+                </li>
+                <li>
+                    <a href="/transacao.html">
+                        <div class="sidebar-icon">
+                             
+                        </div>
+                        <span>Transação</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/proventos.html">
+                        <div class="sidebar-icon">
+                                                
+                        </div>
+                        <span>Dividendo</span>
+                    </a> 
+                    
+                </li>
+    
+            </ul>
+        </nav>
+    
+       
+    
+        <nav style="margin-top: auto;">
+            <ul>
+                <li>
+                    <a href="">
+                        <div class="sidebar-icon">                      
+                                                 
+                        </div>
+                        <span>Configuração</span>                    
+                    </a> 
+                </li>
+            </ul>
+        </nav>
+    
+
+    </aside>
+
+    <main>
+        <Header></Header>
+
+        <div>
+            <div class="dashboard-screen">
+            
+
+                <div class="grid-container">
+                    <div class="card">
+                        <h4>Valor Patrimonial</h4>
+                        <span>R$ 00.000,00</span>
+                    </div>
+                    <div class="card">
+                        <h4>Valor Patrimonial</h4>
+                        <span>R$ 00.000,00</span>
+                    </div>
+                    <div class="card">
+                        <h4>Valor Patrimonial</h4>
+                        <span>12,50%</span>
+                    </div>
+                    <div class="card">
+                        <h4>Dividend Yield</h4>
+                        <span>0,95%</span>
+                    </div>
+    
+                    <div class="card evolucao-patrimonial">
+                        <h4>Valor Patrimonial</h4>
+                    </div>
+                    <div class="card categoria-patrimonial">
+                        <h4>Valor Patrimonial</h4>
+                    </div>
+                </div>
+                <div id="tabela"></div>
+    
+                
+            </div>
+            
+        </div>
+        
+    </main>
+</div>
+    
+
+    <style>
+
+
+
+    </style>
+
+<script type="module" src="dados.js"></script>
+<script type="module" src="script.js"></script>
+    
+    
+</body>
+</html>
+

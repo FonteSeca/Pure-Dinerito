@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Obter Cotação de Ação Brasileira</title>
+</head>
+<body>
+    <h1>Cotação da Ação</h1>
+    <p id="stock-price"></p>
+
+    <script>
+        // Substitua 'YOUR_API_KEY' pela sua chave de API da Alpha Vantage
+        const apiKey = 'SHZIJ9SXUIJVI7QK';
+        const symbol = 'PETR4.SA'; // Símbolo da ação brasileira (Petrobras, por exemplo)
+        const apiUrl = `https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=${symbol}&interval=5min&apikey=${apiKey}`;
+
+        // Função para obter a cotação da ação
+        async function getStockPrice() {
+            try {
+                const response = await fetch(apiUrl);
+                const data = await response.json();
+                
+                if (data['Time Series (5min)']) {
+                    const timeSeries = data['Time Series (5min)'];
+                    const latestTimestamp = Object.keys(timeSeries)[0];
+                    const latestData = timeSeries[latestTimestamp];
+                    const latestPrice = latestData['1. open'];
+
+                    document.getElementById('stock-price').textContent = `A cotação mais recente da ação ${symbol} é R$${latestPrice}`;
+                } else {
+                    document.getElementById('stock-price').textContent = 'Erro ao obter a cotação da ação.';
+                }
+            } catch (error) {
+                console.error('Erro ao obter a cotação da ação:', error);
+                document.getElementById('stock-price').textContent = 'Erro ao obter a cotação da ação.';
+            }
+        }
+
+        // Chamar a função para obter a cotação da ação ao carregar a página
+        getStockPrice();
+    </script>
+</body>
+</html>
