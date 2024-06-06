@@ -262,15 +262,27 @@ function plotSegmentoGraph(data) {
             maintainAspectRatio: false,
             plugins: {
                 legend: {
-                    position: 'bottom'
+                    position: 'right'
                 },
                 title: {
-                    display: true,
+                    display: false,
                     text: 'Distribuição do Patrimônio por Segmento'
+                },
+                datalabels: {
+                    display: true,
+                    color: '#202020', // Cor do texto
+                    font: {
+                        size: 12
+                    },
+                    formatter: function(value, context) {
+                        return labels[context.dataIndex] + ': ' + value.toFixed(2) + '%';
+                    }
                 }
             }
         }
     });
+    
+    
 }
 
 
@@ -329,7 +341,7 @@ function plotTipoGraph(data) {
                     position: 'bottom'
                 },
                 title: {
-                    display: true,
+                    display: false,
                     text: 'Distribuição do Patrimônio por Segmento'
                 }
             }
