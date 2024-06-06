@@ -15,6 +15,8 @@
 
     
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+
 </head>
 <body>
     <div class="MainContainer">
@@ -101,7 +103,7 @@
                         <span>R$ 00.000,00</span>
                     </div>
                     <div class="card">
-                        <h4>Valor Patrimonial</h4>
+                        <h4>Variação Patrimonial</h4>
                         <span>12,50%</span>
                     </div>
                     <div class="card">
@@ -111,22 +113,72 @@
     
                     <div class="card evolucao-patrimonial">
                         <h4>Valor Patrimonial</h4>
-                        <canvas id="graficoPatrimonio" width="400" height="200"></canvas>
+                        <div class="grafico-patrimonio">
+                            <canvas id="graficoPatrimonio"></canvas>
+                        </div>
                     </div>
                     <div class="card categoria-patrimonial">
                         <h4>Valor Patrimonial</h4>
-                        <canvas id="graficoTipo" width="400" height="200"></canvas>
+                        <div class="grafico-tipo">
+
+                            <canvas id="graficoTipo"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="card card-proventos">
+
+                        <div class="proventos">
+                            <div class="grafico-proventos">
+        
+                                <canvas id="graficoProventos"></canvas>
+                            </div>
+        
+                        </div>
                     </div>
 
                 </div>
                 
                 
+                
                 <div id="tabela"></div>
                 
+                <div class="grafico-segmento">
+
+                    <canvas id="graficoSegmento"></canvas>
+                </div>
                 
-                <canvas id="graficoSegmento" width="400" height="200"></canvas>
+            </div>
+            <div>
+                <label for="timeFilter">Filtro de Tempo:</label>
+                <select id="timeFilter">
+                    <option value="monthly">Mensal</option>
+                    <option value="annual">Anual</option>
+                </select>
+        
+                <label for="typeFilter">Tipo de Operação:</label>
+                <select id="typeFilter">
+                    <option value="all">Todos</option>
+                    <option value="Rendimento">Rendimento</option>
+                    <option value="JCP">JCP</option>
+                </select>
+        
+                <label for="ticketFilter">Filtrar por Ticket:</label>
+                <select id="ticketFilter">
+                    <!-- As opções serão preenchidas dinamicamente pelo JavaScript -->
+                </select>
+        
+                <!-- Adicione um select para o filtro de tipo de Ticket -->
+                <label for="tipoTicketFilter">Tipo de Ticket:</label>
+                <select id="tipoTicketFilter">
+                <option value="all">Todos</option>
+                </select>
+                
+        
+        
+                <button id="applyFilters">Aplicar Filtros</button>
+            </div>
+            <div class="proventos">
                 <canvas id="graficoProventos" width="400" height="200"></canvas>
-                
             </div>
             
         </div>
@@ -143,6 +195,7 @@
 
 <script type="module" src="dados.js"></script>
 <script type="module" src="script.js"></script>
+<script type="module" src="scriptProventos.js"></script>
     
     
 </body>

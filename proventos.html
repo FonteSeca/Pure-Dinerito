@@ -90,11 +90,11 @@
     
                     <div class="grid-container">
                         <div class="card">
-                            <h4>Valor Patrimonial</h4>
-                            <span>R$ 00.000,00</span>
+                            <h4>Dividendos Neste Mês</h4>
+                            <span>R$ <span id="valor-aplicado-text"></span></span>
                         </div>
                         <div class="card">
-                            <h4>Valor Patrimonial</h4>
+                            <h4>Próximo Dividendo Projetado</h4>
                             <span>R$ 00.000,00</span>
                         </div>
                         <div class="card">
@@ -106,12 +106,6 @@
                             <span>0,95%</span>
                         </div>
         
-                        <div class="card evolucao-patrimonial">
-                            <h4>Valor Patrimonial</h4>
-                        </div>
-                        <div class="card categoria-patrimonial">
-                            <h4>Valor Patrimonial</h4>
-                        </div>
                     </div>
                     
                     <h1>Proventos</h1>
@@ -145,7 +139,11 @@
                         <button id="applyFilters">Aplicar Filtros</button>
                     </div>
                     <div class="proventos">
-                        <canvas id="graficoProventos" width="400" height="200"></canvas>
+                        <div class="grafico-proventos">
+    
+                            <canvas id="graficoProventos"></canvas>
+                        </div>
+    
                     </div>
                 
                     

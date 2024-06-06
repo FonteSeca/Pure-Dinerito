@@ -19,7 +19,7 @@ renderTable(globalData.movimentacao);
 plotGraph(globalData.movimentacao);
 plotSegmentoGraph(globalData.carteira);
 plotTipoGraph(globalData.carteira);
-plotProventosGraph(globalData.proventos);
+
 
 
 
@@ -131,7 +131,7 @@ function plotGraph(data) {
             }]
         },
         options: {
-            responsive: true,
+            maintainAspectRatio: false,
             scales: {
                 x: {
                     display: true,
@@ -259,7 +259,7 @@ function plotSegmentoGraph(data) {
             }]
         },
         options: {
-            responsive: true,
+            maintainAspectRatio: false,
             plugins: {
                 legend: {
                     position: 'bottom'
@@ -323,7 +323,7 @@ function plotTipoGraph(data) {
             }]
         },
         options: {
-            responsive: true,
+            maintainAspectRatio: false,
             plugins: {
                 legend: {
                     position: 'bottom'

@@ -50,18 +50,16 @@ function parseDate(dateStr) {
     return new Date(year, month - 1, day);
 }
 
-let chart = null; // Variável global para armazenar o objeto de gráfico
+
 
 
 function plotProventosGraph(data, groupBy = 'monthly', filterType = 'all', filterTicket = 'all', filterTipoTicket = 'all') {
     
 
-    const canvas = document.getElementById('graficoProventos');
-    const ctx = canvas.getContext('2d');
+    
+    
 
-    if (chart !== null) {
-        chart.destroy();
-    }
+ 
 
     const groupedProventos = {};
 
@@ -99,7 +97,7 @@ function plotProventosGraph(data, groupBy = 'monthly', filterType = 'all', filte
         datasets.push({
             label: 'Rendimento',
             data: labels.map(label => groupedProventos[label].Rendimento),
-            backgroundColor: 'rgba(175, 175, 175, 1)',
+            backgroundColor: '#AFAFAF',
             borderRadius: 5,
             borderColor: 'white',
             borderWidth: 0
@@ -108,7 +106,7 @@ function plotProventosGraph(data, groupBy = 'monthly', filterType = 'all', filte
         datasets.push({
             label: 'JCP',
             data: labels.map(label => groupedProventos[label].JCP),
-            backgroundColor: 'rgba(128, 128, 128, 1)',
+            backgroundColor: '#808080',
             borderRadius: 5,
             borderColor: 'white',
             borderWidth: 0
@@ -117,21 +115,45 @@ function plotProventosGraph(data, groupBy = 'monthly', filterType = 'all', filte
         datasets.push({
             label: filterType,
             data: labels.map(label => groupedProventos[label][filterType]),
-            backgroundColor: 'rgba(75, 192, 192, 1)',
+            backgroundColor: '#AFAFAF',
             borderRadius: 5,
             borderColor: 'white',
             borderWidth: 0
         });
     }
 
-    chart = new Chart(ctx, {
+    const ctx = document.getElementById('graficoProventos').getContext('2d');
+
+    // Plugin para desenhar a barra cinza no fundo
+    const backgroundBarPlugin = {
+        id: 'backgroundBar',
+        beforeDraw: (chart) => {
+            const ctx = chart.ctx;
+            const chartArea = chart.chartArea;
+            const activeElements = chart.tooltip._active || [];
+
+            if (activeElements.length) {
+                const activeElement = activeElements[0];
+                const datasetIndex = activeElement.datasetIndex;
+                const index = activeElement.index;
+                const meta = chart.getDatasetMeta(datasetIndex);
+                const data = meta.data[index];
+
+                ctx.save();
+                ctx.fillStyle = 'rgba(192, 192, 192, 0.5)'; // Cor cinza com opacidade
+                ctx.fillRect(data.x - data.width / 2, chartArea.top, data.width, chartArea.bottom - chartArea.top);
+                ctx.restore();
+            }
+        }
+    };
+    new Chart(ctx, {
         type: 'bar',
         data: {
             labels: labels,
             datasets: datasets
         },
         options: {
-            responsive: true,
+            maintainAspectRatio: false,
             scales: {
                 x: {
                     stacked: true,
@@ -155,8 +177,80 @@ function plotProventosGraph(data, groupBy = 'monthly', filterType = 'all', filte
                         text: 'Valor Pago (R$)'
                     }
                 }
+            },
+            hover: {
+                mode: 'index', // Define o modo de hover para mostrar todos os itens da pilha
+                intersect: false // Define se o hover deve intersectar a barra ou não
+            },
+            plugins: {
+                tooltip: {
+                    enabled: true, // Habilita o tooltip ao passar o mouse
+                    mode: 'index', // Modo de exibição do tooltip
+                    intersect: false,
+                    backgroundColor: 'rgba(32, 32, 32, 1)', // Cor de fundo do tooltip
+                    titleFont: {
+                        size: 16,
+                        weight: 'bold',
+                        family: 'Inter',
+                        style: 'italic',
+                        color: '#ffffff'
+                    },
+                    bodyFont: {
+                        size: 13,
+                        family: 'Inter',
+                        color: '#ffffff'
+                    },
+                    footerFont: {
+                        size: 13,
+                        family: 'Inter',
+                        color: '#ffffff'
+                    },
+                    padding: 10,
+                    cornerRadius: 10,
+                    borderWidth: 0,
+                    borderColor: '#ffffff',
+                    caretSize: 6,
+                    displayColors: true, // Mostrar as cores de amostra
+                    usePointStyle: true, // Usar estilo de ponto em vez de quadrado
+                    pointStyle: 'circle', // Estilo do ponto como círculo
+                    boxHeight: 15, // Altura do ponto de cor
+                    boxWidth: 15, // Largura do ponto de cor
+                    borderWidth: 0, // Sem borda para o ponto de cor
+                    callbacks: {
+                        title: function(tooltipItems) {
+                            // Customiza o título do tooltip
+                            return tooltipItems[0].label;
+                        },
+                        label: function(tooltipItem) {
+                            // Customiza o conteúdo do tooltip
+                            const datasetLabel = tooltipItem.dataset.label || '';
+                            return datasetLabel + ': R$ ' + tooltipItem.raw.toFixed(2);
+                        },
+                        footer: function(tooltipItems) {
+                            // Adiciona o total no rodapé do tooltip
+                            let total = 0;
+                            tooltipItems.forEach(function(tooltipItem) {
+                                total += tooltipItem.raw;
+                            });
+                            return 'Total: R$ ' + total.toFixed(2);
+                        }
+                    }
+                },
+                datalabels: {
+                    anchor: 'end',
+                    align: 'end',
+                    color: '#000', // Cor dos rótulos
+                    font: {
+                        size: 12,
+                        weight: 'bold'
+                    },
+                    formatter: function(value) {
+                        return 'R$ ' + value.toFixed(2); // Formata com duas casas decimais
+                    }
+                }
             }
-        }
+        },
+        plugins: [backgroundBarPlugin] // Adicione o ChartDataLabels aqui
     });
 }
 

@@ -105,14 +105,16 @@ hr {
 
 .grid-container {
   display: grid;
-  grid-template-columns: auto auto auto auto;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-gap: 20px;
 }
 
 .card {
   background-color: white;
-  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.05);
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.025);
   padding: 25px 30px;
+  border: 1px solid #E3E5E7;
+  border-radius: 10px;
 
   h4 {
       font-size: 12px;
@@ -212,8 +214,10 @@ table-container {
 
 table {
   width: 100%;
-  border-collapse: collapse;
-  border: 1px solid #ccc;
+  
+  border-spacing: 5px;
+  border-collapse: separate;
+  border: none;
 
   thead {
       font-size: 11px;
@@ -225,23 +229,34 @@ table {
   tr {
       border-radius: 10px;
       margin-bottom: 1px;
-      background-color: rgba(0, 0, 0, 0.02);
+      background-color: #DCDCDC;
       border-spacing: 1px;
+
+      th {
+          font-size: 12px;
+          color: rgba(32,32,32, 0.4);
+          font-weight: 600;
+          text-transform: uppercase;
+          border-radius: 5px;
+          text-align: center;
+      }
 
       td {
           font-size: 12px;
-          color: rgba(black, 0.6);
+          color: rgba(32,32,32, 0.6);
           font-weight: 700;
           text-transform: uppercase;
+          border-radius: 5px;
+          text-align: center;
       }
   }
 }
 
 table th,
 table td {
-  padding: 10px;
+  padding: 15px 10px 15px 10px;
   text-align: left;
-  border-bottom: 1px solid #ccc;
+  
 }
 
 table th {
@@ -253,13 +268,13 @@ table th {
 }
 
 table td {
-  color: rgba(0, 0, 0, 0.6);
+  color: rgba(32, 32, 32, 0.5);
   font-size: 10px;
   font-weight: 700;
 }
 
 table tr:nth-child(even) {
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: rgba(0, 0, 0, 0.05);
 }
 
 table tr:hover {
@@ -288,8 +303,124 @@ aside {
 }
 
 
-.proventos {
+/* .proventos {
   background-color: #D7D7D7;
   margin: 0 -40px 0 -40px;
   padding: 40px;
+} */
+
+
+.grafico-patrimonio, .grafico-tipo, .grafico-segmento {
+  height: 350px;
+  min-height: 0;
+  min-width: 0;
+}
+
+.grafico-proventos {
+  height: 300px;;
+}
+
+canvas {
+  height: 100% !important;
+    width: 100% !important;
+    min-width: 0;
+    overflow: hidden;
+}
+
+.card-proventos {
+  grid-column: 1 / span 4;
+}
+
+/* 
+  ##Device = Tablets, Ipads (landscape)
+  ##Screen = B/w 768px to 1024px
+*/
+
+@media (max-width: 1280px) {
+  
+  /* CSS */
+  aside {
+    display: none;
+  }
+  main {
+    width: 100%;
+  }
+}
+
+/* 
+  ##Device = Tablets, Ipads (portrait)
+  ##Screen = B/w 768px to 1024px
+*/
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  
+  /* CSS */
+  aside {
+    display: none;
+  }
+  main {
+    width: 100%;
+  }
+
+  .dashboard-screen {
+    .evolucao-patrimonial, .categoria-patrimonial {
+      grid-column: 1 / span 4;
+    }
+  }
+
+  .card-proventos {
+    grid-column: 1 / span 4;
+  }
+  
+}
+
+
+@media (min-width: 480px) and (max-width: 768px) {
+  .grid-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 20px;
+  }
+
+  .dashboard-screen {
+    .evolucao-patrimonial, .categoria-patrimonial {
+      grid-column: 1 / span 2;
+    }
+  }
+
+  .card-proventos {
+    grid-column: 1 / span 2;
+  }
+}
+
+/* 
+  ##Device = Most of the Smartphones Mobiles (Portrait)
+  ##Screen = B/w 320px to 479px
+*/
+
+@media (max-width: 480px) {
+  
+  /* CSS */
+  aside {
+    display: none;
+  }
+  main {
+    width: 100%;
+  }
+
+  .grid-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-gap: 20px;
+  }
+
+  .dashboard-screen {
+    .evolucao-patrimonial {
+        grid-column: auto;
+    }
+  }
+
+  .card-proventos {
+    grid-column: auto;
+  }
 }
