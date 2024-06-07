@@ -82,7 +82,7 @@ function calcularCotasAdquiridas(movimentacaoData) {
     return cotasAdquiridas;
 }
 
-function calcularValorPago(movimentacaoData) {
+async function calcularValorPago(movimentacaoData) {
     const valorPago = {};
 
     movimentacaoData.forEach(item => {
@@ -90,18 +90,27 @@ function calcularValorPago(movimentacaoData) {
         const valorUnitario = parseFloat(item['Valor Unitario']); // Obter o valor unitário do item
         const quantidade = parseFloat(item.Quantidade);
 
-        // Calcular o valor pago multiplicando o valor unitário pela quantidade
+        // Calcular o valor total da transação
         const valorTotal = valorUnitario * quantidade;
 
+        // Inicializar o valor pago para o ticket se ainda não estiver definido
         if (!valorPago[ticket]) {
             valorPago[ticket] = 0;
         }
 
-        valorPago[ticket] += valorTotal;
+        // Verificar a operação e atualizar o valor pago de acordo
+        if (item.Operacao === 'Compra') {
+            valorPago[ticket] += valorTotal;
+        } else if (item.Operacao === 'Venda') {
+            valorPago[ticket] -= valorTotal;
+        }
+
     });
 
     return valorPago;
 }
+
+
 
 function calcularProventosPagos(proventosData) {
     const proventosPagos = {};
@@ -122,18 +131,50 @@ function calcularProventosPagos(proventosData) {
     return proventosPagos;
 }
 
+async function atualizarCarteira(carteiraData, cotasAdquiridas, valorTestePago, proventosPagos) {
+    // Mapeia cada item da carteira e atualiza os valores conforme necessário
 
-function atualizarCarteira(carteiraData, cotasAdquiridas, valorPago, proventosPagos) {
+    console.log('Carteira Desatualizada: ', carteiraData);
     return carteiraData.map(item => {
         const ticket = item.Ticket;
-        return {
-            ...item,
-            'Cotas Adquiridas': cotasAdquiridas[ticket] || 0,
-            'Valor Pago': valorPago[ticket] || 0,
-            'Proventos Pagos': proventosPagos[ticket] || 0
+    
+        // Obtém a quantidade de cotas adquiridas para o ticket atual ou define como 0 se não houver valor
+        const cotasAdquiridasAtualizadas = cotasAdquiridas[ticket] || 0;
+    
+        // Obtém o valor pago para o ticket atual ou define como 0 se não houver valor
+        const valorPagoAtualizado = valorTestePago[ticket] || 0;
+    
+        // Obtém os proventos pagos para o ticket atual ou define como 0 se não houver valor
+        const proventosPagosAtualizados = proventosPagos[ticket] || 0;
+    
+       
+        // Retorna um novo objeto com os valores atualizados
+        const updatedItem = {
+            Ticket: item.Ticket,
+            Tipo: item.Tipo,
+            'Proventos Pagos': proventosPagosAtualizados,
+            Segmento: item.Segmento,
+            'Cotas Adquiridas': cotasAdquiridasAtualizadas,
+            'Valor_Pago': valorPagoAtualizado.toFixed(2)
         };
+
+        return updatedItem;
     });
 }
+
+
+
+async function atualizarCarteiraAsync(carteiraData, cotasAdquiridas, valorPago, proventosPagos) {
+    try {
+        const carteiraAtualizada = await atualizarCarteira(carteiraData, cotasAdquiridas, valorPago, proventosPagos);
+
+        console.log('Carteira Atualizada:', carteiraAtualizada);
+        return carteiraAtualizada;
+    } catch (error) {
+        throw new Error('Erro ao atualizar carteira: ' + error.message);
+    }
+}
+
 
 
 
@@ -143,11 +184,26 @@ async function carregarEProcessarDados() {
         const carteiraData = await carregarCarteira();
         const proventosData = await carregarProventos();
     
-        const cotasAdquiridas = calcularCotasAdquiridas(movimentacaoData);
-        const valorPago = calcularValorPago(movimentacaoData);
-        const proventosPagos = calcularProventosPagos(proventosData);
+        const cotasAdquiridas = await calcularCotasAdquiridas(movimentacaoData);
+        const valorPago = await calcularValorPago(movimentacaoData);
+        const proventosPagos = await calcularProventosPagos(proventosData);
+
+
+        console.log('Valores calculados:', valorPago);
+
+        console.log('Cotas Adquiridas:', cotasAdquiridas);
+
+        console.log('Proventos Pagos:', proventosPagos);
+
+        //let teste = await atualizarCarteira(carteiraData, cotasAdquiridas, valorPago, proventosPagos)
+        //console.log('Carteira Atualizada:', teste);
     
-        const carteiraAtualizada = atualizarCarteira(carteiraData, cotasAdquiridas, valorPago, proventosPagos);
+        const carteiraAtualizada = await atualizarCarteiraAsync(carteiraData, cotasAdquiridas, valorPago, proventosPagos);
+
+
+        console.log('Carteira Atualizada:', carteiraAtualizada);
+
+
     
         const globalData = { carteira: carteiraAtualizada, movimentacao: movimentacaoData, proventos: proventosData };
     
@@ -162,10 +218,14 @@ async function carregarEProcessarDados() {
 }
 
 // Chamar a função para carregar e processar os dados
-carregarEProcessarDados();
+
 
 // dados.js
 
 // Chamar a função para carregar e processar os dados
-const globalDatas = await carregarEProcessarDados();
+async function globalDatas() {
+    const carregarDados = await carregarEProcessarDados();
+    
+    return carregarDados;
+}
 export { globalDatas };

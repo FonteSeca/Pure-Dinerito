@@ -329,7 +329,65 @@
     </main>
 </div>
     
+<script>
 
+
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Função que obtém o valor desejado (cotação do ticker)
+    async function obterValorMedioTicker() {
+        try {
+            const valorMedio = await pegarCotacao('PETR4');
+            return valorMedio !== null ? valorMedio.toFixed(2) : 'N/A';
+        } catch (error) {
+            console.error('Erro ao obter valor médio do ticker:', error);
+            return 'N/A';
+        }
+    }
+
+    // Função que atualiza o valor no DOM
+    async function atualizarValorMedioTicker() {
+        const valorMedio = await obterValorMedioTicker();
+        const elementoValorMedioTicker = document.querySelector('h3.valor-medio-ticker');
+        if (elementoValorMedioTicker) {
+            elementoValorMedioTicker.textContent = valorMedio;
+        }
+    }
+
+    // Chama a função para atualizar o valor
+    atualizarValorMedioTicker();
+});
+
+// Função para pegar a cotação usando a API fornecida
+async function pegarCotacao(ticket) {
+    const url = `https://brapi.dev/api/quote/${ticket}?token=nfHJqPhTNSq1iK8mTsxqHs`;
+
+    try {
+        const response = await fetch(url);
+        const data = await response.json();
+
+        if (data.results && data.results.length > 0) {
+            const result = data.results[0];
+            return parseFloat(result.regularMarketPrice);
+        } else {
+            throw new Error('Dados não disponíveis');
+        }
+    } catch (error) {
+        console.error('Erro ao pegar cotação:', error);
+        return null;
+    }
+}
+
+
+
+
+
+
+
+
+
+</script>
     <style>
 
 

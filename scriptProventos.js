@@ -6,13 +6,38 @@ const supabase = createClient(supabaseUrl, supabaseKey)
 
 // scriptUso.js
 
-// Importando globalDatas de dados.js com um nome diferente
 import { globalDatas as globalDatae } from "./dados.js";
 
 // Agora você pode usar globalDatae neste script
-console.log(globalDatae);
 
-let globalData = globalDatae;
+
+// Função assíncrona para usar os dados
+async function usarDados() {
+    try {
+        // Chama a função globalDatas para obter os dados
+        const dados = await globalDatae();
+        
+        // Retorna os dados para que possam ser usados fora da função
+        return dados;
+    } catch (error) {
+        // Em caso de erro, lida com ele de acordo com sua lógica de tratamento de erros
+        console.error('Erro ao usar os dados:', error);
+        // Retorna null em caso de erro
+        return null;
+    }
+}
+
+
+// Chama a função usarDados para começar a usar os dados
+
+
+
+
+const globalData = await usarDados();
+
+
+
+console.log('Carteira Consolidada: ', globalData);
 
 function puxando() {
     updateFiltersAndRender(globalData.proventos, globalData.carteira);
@@ -54,9 +79,13 @@ function parseDate(dateStr) {
 
 
 function plotProventosGraph(data, groupBy = 'monthly', filterType = 'all', filterTicket = 'all', filterTipoTicket = 'all') {
-    
+    const ctx = document.getElementById('graficoProventos').getContext('2d');
 
-    
+    if (ctx.proventosChart) {
+        // Se existir, destrua o gráfico antes de criar um novo
+        ctx.proventosChart.destroy();
+        console.log('Destruindo o gráfico existente');
+    }
     
 
  
@@ -73,7 +102,7 @@ function plotProventosGraph(data, groupBy = 'monthly', filterType = 'all', filte
         const ticket = item.Ticket;
 
         if (!groupedProventos[groupKey]) {
-            groupedProventos[groupKey] = { Rendimento: 0, JCP: 0 };
+            groupedProventos[groupKey] = { Rendimento: 0, JCP: 0, Dividendo: 0 };
         }
 
         if ((filterType === 'all' || filterType === operacao) && (filterTicket === 'all' || filterTicket === ticket)) {
@@ -97,7 +126,7 @@ function plotProventosGraph(data, groupBy = 'monthly', filterType = 'all', filte
         datasets.push({
             label: 'Rendimento',
             data: labels.map(label => groupedProventos[label].Rendimento),
-            backgroundColor: '#AFAFAF',
+            backgroundColor: 'rgba(32, 32, 32, 0.7)',
             borderRadius: 5,
             borderColor: 'white',
             borderWidth: 0
@@ -106,11 +135,22 @@ function plotProventosGraph(data, groupBy = 'monthly', filterType = 'all', filte
         datasets.push({
             label: 'JCP',
             data: labels.map(label => groupedProventos[label].JCP),
-            backgroundColor: '#808080',
+            backgroundColor: 'rgba(32, 32, 32, 0.5)',
             borderRadius: 5,
             borderColor: 'white',
             borderWidth: 0
         });
+
+        datasets.push({
+            label: 'Dividendo',
+            data: labels.map(label => groupedProventos[label].Dividendo),
+            backgroundColor: 'rgba(32, 32, 32, 0.3)',
+            borderRadius: 5,
+            borderColor: 'white',
+            borderWidth: 0
+        });
+
+
     } else {
         datasets.push({
             label: filterType,
@@ -122,7 +162,7 @@ function plotProventosGraph(data, groupBy = 'monthly', filterType = 'all', filte
         });
     }
 
-    const ctx = document.getElementById('graficoProventos').getContext('2d');
+    
 
     // Plugin para desenhar a barra cinza no fundo
     const backgroundBarPlugin = {
@@ -146,7 +186,8 @@ function plotProventosGraph(data, groupBy = 'monthly', filterType = 'all', filte
             }
         }
     };
-    new Chart(ctx, {
+
+    ctx.proventosChart = new Chart(ctx, {
         type: 'bar',
         data: {
             labels: labels,
@@ -268,7 +309,9 @@ document.getElementById('applyFilters').addEventListener('click', () => {
     const proventosData = globalData.proventos;
     const filteredData = filterData(proventosData, timeFilter, typeFilter, ticketFilter, tipoTicketFilter);
 
-    renderTable(filteredData);
+    // renderTable(filteredData);
+    renderTableProventos(filteredData, 'tabela-proventos');
+    console.log('teste');
     plotProventosGraph(filteredData, timeFilter, typeFilter, ticketFilter, tipoTicketFilter);
 });
 
@@ -362,7 +405,8 @@ function updateFiltersAndRender(proventosData, carteiraData) {
     const tipoTicketFilter = 'all';
     const filteredData = filterData(proventosData, timeFilter, typeFilter, ticketFilter, tipoTicketFilter);
 
-    renderTable(filteredData);
+    renderTableProventos(filteredData, 'tabela-proventos');
+    // renderTable(filteredData);
     plotProventosGraph(filteredData, timeFilter, typeFilter, ticketFilter, tipoTicketFilter);
 }
 
@@ -389,3 +433,101 @@ function updateTipoTicketFilterOptions(dataCarteira) {
 }
 
 puxando();
+
+
+
+function checkElementById(elementId) {
+    const element = document.getElementById(elementId);
+    if (element) {
+        console.log(`O elemento com ID "${elementId}" existe na página.`);
+        return true;
+    } else {
+        console.log(`O elemento com ID "${elementId}" não existe na página.`);
+        return false;
+    }
+}
+
+verifica();
+
+function verifica() {
+
+
+    
+    if (checkElementById('tabela-proventos') === true) {
+        renderTableProventos(globalData.proventos, 'tabela-proventos');
+    }
+
+}
+
+
+function renderTableProventos(data, idElemento) {
+    const table = document.querySelector(`#${idElemento} table`);
+    const tbody = table.querySelector('tbody');
+
+    // Limpa o conteúdo existente do tbody
+    tbody.innerHTML = '';
+
+    data.forEach(item => {
+        const valorUnitario = parseFloat(item['Valor Unitario']);
+        const quantidade = parseFloat(item['Quantidade']);
+        const valorPago = valorUnitario * quantidade;
+        item['Valor Pago'] = valorPago.toFixed(2);
+
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td>${item['Ticket']}</td>
+            <td>${item['Operacao']}</td>
+            <td>${item['Data Com']}</td>
+            <td>${item['Data Pag']}</td>
+            <td>${item['Quantidade']}</td>
+            <td>R$ ${item['Valor Unitario']}</td>
+            <td>R$ ${item['Valor Pago']}</td>
+            <td><button class="btn-editar">Editar</button></td>
+        `;
+        tbody.appendChild(row);
+    });
+}
+
+
+
+
+function renderTableTransacao(data, idElemento) {
+    const table = document.createElement('table');
+    table.innerHTML = `
+        <thead>
+            <tr>
+            <th>Ticket</th>
+            <th>Operação</th>
+            <th>Data</th>
+            <th>Quantidade</th>
+            <th>Valor Unitário</th>
+            <th>Valor Total</th>
+            <th>Editar</th>
+            </tr>
+        </thead>
+    `;
+    
+    const tbody = document.createElement('tbody');
+    
+    data.forEach(item => {
+        const valorUnitario = parseFloat(item['Valor Unitario']);
+        const quantidade = parseFloat(item['Quantidade']);
+        const valorPago = valorUnitario * quantidade;
+        item['Valor Pago'] = valorPago.toFixed(2);
+
+        const row = document.createElement('tr');
+        row.innerHTML = `
+        <td>${item['Ticket']}</td>
+        <td>${item['Operacao']}</td>
+        <td>${item['Data']}</td>
+        <td>${item['Quantidade']}</td>
+        <td>R$ ${item['Valor Unitario']}</td>
+        <td>R$ ${item['Valor Pago']}</td>
+        <td><button class="btn-editar">Editar</button></td>
+        `;
+        tbody.appendChild(row);
+    });
+    
+    table.appendChild(tbody);
+    document.getElementById(idElemento).appendChild(table);
+}

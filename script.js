@@ -13,9 +13,33 @@ import { globalDatas as globalDatae } from "./dados.js";
 // Agora você pode usar globalDatae neste script
 
 
-let globalData = globalDatae;
+// Função assíncrona para usar os dados
+async function usarDados() {
+    try {
+        // Chama a função globalDatas para obter os dados
+        const dados = await globalDatae();
+        
+        // Retorna os dados para que possam ser usados fora da função
+        return dados;
+    } catch (error) {
+        // Em caso de erro, lida com ele de acordo com sua lógica de tratamento de erros
+        console.error('Erro ao usar os dados:', error);
+        // Retorna null em caso de erro
+        return null;
+    }
+}
 
-console.log(globalData);
+
+// Chama a função usarDados para começar a usar os dados
+
+
+
+
+const globalData = await usarDados();
+
+
+
+console.log('Carteira Consolidada: ', globalData);
 
 // renderTable(globalData.movimentacao);
 
@@ -44,19 +68,26 @@ function verifica() {
     }
     
     if (checkElementById('tabela-transacao') === true) {
-        listarDados(globalData.transacao, 'tabela-transacao');
+        renderTableTransacao(globalData.movimentacao, 'tabela-transacao');
     }
     
     if (checkElementById('tabela-proventos') === true) {
-        listarDados(globalData.proventos, 'tabela-proventos');
+        renderTableProventos(globalData.proventos, 'tabela-proventos');
     }
 
     if (checkElementById('graficoPatrimonio') === true) {
         plotGraph(globalData.movimentacao);
     }
 
-    if (checkElementById('graficoSegmento') === true) {
-        plotSegmentoGraph(globalData.carteira);
+    if (checkElementById('graficoSegmentoFII') === true) {
+//        plotSegmentoGraph(globalData.carteira);
+        
+        plotSegmentoGraphTipo(globalData.carteira, 'FII', 'bottom');
+    }
+
+    if (checkElementById('graficoSegmentoAcao') === true) {
+        //        plotSegmentoGraph(globalData.carteira);
+        plotSegmentoGraphTipo(globalData.carteira, 'Ação', 'bottom');
     }
 
     if (checkElementById('graficoTipo') === true) {
@@ -104,84 +135,179 @@ function verifica() {
 }
 
 
-
-
-
-function aasrenderTable(data) {
+function renderTableProventos(data, idElemento) {
     const table = document.createElement('table');
     table.innerHTML = `
-        <tr>
-            <th>Operação</th>
-            <th>Data</th>
+        <thead>
+            <tr>
             <th>Ticket</th>
-            <th>Valor Unitário</th>
+            <th>Operação</th>
+            <th>Data Com</th>
+            <th>Data Pag</th>
             <th>Quantidade</th>
-            <th>Valor Pago</th>
-        </tr>
+            <th>Valor Unitário</th>
+            <th>Valor Total</th>
+            <th>Editar</th>
+            </tr>
+        </thead>
     `;
+    
+    const tbody = document.createElement('tbody');
+    
     data.forEach(item => {
         const valorUnitario = parseFloat(item['Valor Unitario']);
         const quantidade = parseFloat(item['Quantidade']);
         const valorPago = valorUnitario * quantidade;
         item['Valor Pago'] = valorPago.toFixed(2);
 
-        table.innerHTML += `
-            <tr>
-                <td>${item['Operacao']}</td>
-                <td>${item['Data']}</td>
-                <td>${item['Ticket']}</td>
-                <td>R$ ${item['Valor Unitario']}</td>
-                <td>${item['Quantidade']}</td>
-                <td>R$ ${item['Valor Pago']}</td>
-            </tr>
+        const row = document.createElement('tr');
+        row.innerHTML = `
+        <td>${item['Ticket']}</td>
+        <td>${item['Operacao']}</td>
+        <td>${item['Data Com']}</td>
+        <td>${item['Data Pag']}</td>
+        <td>${item['Quantidade']}</td>
+        <td>R$ ${item['Valor Unitario']}</td>
+        <td>R$ ${item['Valor Pago']}</td>
+        <td><button class="btn-editar">Editar</button></td>
         `;
+        tbody.appendChild(row);
     });
-    document.getElementById('tabela').appendChild(table);
+    
+    table.appendChild(tbody);
+    document.getElementById(idElemento).appendChild(table);
 }
 
 
-function renderTableCarteira(data, idElemento) {
+
+function renderTableTransacao(data, idElemento) {
     const table = document.createElement('table');
     table.innerHTML = `
-        <tr>
+        <thead>
+            <tr>
+            <th>Ticket</th>
+            <th>Operação</th>
+            <th>Data</th>
+            <th>Quantidade</th>
+            <th>Valor Unitário</th>
+            <th>Valor Total</th>
+            <th>Editar</th>
+            </tr>
+        </thead>
+    `;
+    
+    const tbody = document.createElement('tbody');
+    
+    data.forEach(item => {
+        const valorUnitario = parseFloat(item['Valor Unitario']);
+        const quantidade = parseFloat(item['Quantidade']);
+        const valorPago = valorUnitario * quantidade;
+        item['Valor Pago'] = valorPago.toFixed(2);
+
+        const row = document.createElement('tr');
+        row.innerHTML = `
+        <td>${item['Ticket']}</td>
+        <td>${item['Operacao']}</td>
+        <td>${item['Data']}</td>
+        <td>${item['Quantidade']}</td>
+        <td>R$ ${item['Valor Unitario']}</td>
+        <td>R$ ${item['Valor Pago']}</td>
+        <td><button class="btn-editar">Editar</button></td>
+        `;
+        tbody.appendChild(row);
+    });
+    
+    table.appendChild(tbody);
+    document.getElementById(idElemento).appendChild(table);
+}
+
+
+async function pegarCotacao(ticket) {
+    const url = `https://brapi.dev/api/quote/${ticket}?token=nfHJqPhTNSq1iK8mTsxqHs`;
+
+    try {
+        const response = await fetch(url);
+        const data = await response.json();
+
+        if (data.results && data.results.length > 0) {
+            const result = data.results[0];
+            return parseFloat(result.regularMarketPrice);
+        } else {
+            throw new Error('Dados não disponíveis');
+        }
+    } catch (error) {
+        console.error('Erro ao pegar cotação:', error);
+        return null;
+    }
+}
+
+async function atualizarValoresPatrimoniais(data) {
+    for (const item of data) {
+        const ticker = item['Ticket'];
+        const quantidade = parseFloat(item['Cotas Adquiridas']);
+        const cotacaoAtual = await pegarCotacao(ticker);
+
+        if (cotacaoAtual !== null) {
+            item['Valor Patrimonial'] = cotacaoAtual * quantidade;
+        } else {
+            item['Valor Patrimonial'] = 0;  // Ou algum valor padrão em caso de erro
+        }
+    }
+}
+
+async function renderTableCarteira(data, idElemento) {
+    // Atualiza os valores patrimoniais com as cotações atuais
+    await atualizarValoresPatrimoniais(data);
+
+    const table = document.createElement('table');
+    table.innerHTML = `
+        <thead>
+            <tr>
             <th>Ticker</th>
             <th>Quantidade</th>
             <th>Preço Médio</th>
             <th>Valor Aplicado</th>
             <th>Valor Patrimonial</th>
             <th>Variação</th>
-        </tr>
+            <th>Editar</th>
+            </tr>
+        </thead>
     `;
-    data.forEach(item => {
-        const valorUnitario = parseFloat(item['Valor Unitario']);
-        const quantidade = parseFloat(item['Quantidade']);
-        const valorPago = item['Cotas Adquiridas'] * 3;
-        const valorPatrimonial = item['Cotas Adquiridas'] * 4;
-        item['Valor Pago'] = valorPago.toFixed(2);
+    
+    const tbody = document.createElement('tbody');
 
+    data.forEach(item => {
+        const quantidade = parseFloat(item['Cotas Adquiridas']);
+        const valorPago = item['Valor_Pago'];
+        const valorPatrimonial = item['Valor Patrimonial'];
+        
+        const precoMedio = valorPago / quantidade;
         const variacaoValor = valorPatrimonial - valorPago;
-        const variacaoPercentual = ((valorPatrimonial - valorPago) / valorPago) * 100;;
+        const variacaoPercentual = ((valorPatrimonial - valorPago) / valorPago) * 100;
 
         const simboloVariacao = variacaoPercentual > 0 ? '↗' : variacaoPercentual < 0 ? '↘' : '';
         const classeVariacao = variacaoPercentual > 0 ? 'positivo' : variacaoPercentual < 0 ? 'negativo' : 'neutro';
 
-
-        if(variacaoValor < 0) {
-
-        }
-        table.innerHTML += `
-            <tr>
-                <td>${item['Ticket']}</td>
-                <td>${item['Cotas Adquiridas']}</td>
-                <td>${item['Ticket']}</td>
-                <td>R$ ${valorPago}</td>
-                <td>R$ ${valorPatrimonial}</td>
-                <td class="${classeVariacao}">R$ ${variacaoValor} / ${variacaoPercentual.toFixed(2)}% ${simboloVariacao}</td>
-            </tr>
+        const row = document.createElement('tr');
+        row.innerHTML = `
+        <td>${item['Ticket']} - ${item['nome_ticker']}</td>
+        <td>${item['Cotas Adquiridas']}</td>
+        <td>R$ ${precoMedio.toFixed(2)}</td>
+        <td>R$ ${valorPago}</td>
+        <td>R$ ${valorPatrimonial.toFixed(2)}</td>
+        <td class="${classeVariacao}">R$ ${variacaoValor.toFixed(2)} / ${variacaoPercentual.toFixed(2)}% ${simboloVariacao}</td>
+        <td><button class="btn-editar">Editar</button></td>
         `;
+        tbody.appendChild(row);
     });
+
+    table.appendChild(tbody);
     document.getElementById(idElemento).appendChild(table);
 }
+
+
+
+
 
 function plotGraph(data) {
     // Inicializa um objeto para armazenar os valores acumulados por mês e ano
@@ -387,6 +513,93 @@ function plotSegmentoGraph(data) {
 }
 
 
+
+function plotSegmentoGraphTipo(data, tipo, legendaPosicao) {
+    const segmentos = {}; // Objeto para armazenar os valores agrupados por segmento
+    let accumulatedValues = {}; // Objeto para armazenar os valores acumulados por segmento
+
+    // Filtra os dados para incluir apenas os itens do tipo FII
+    const dataFII = data.filter(item => item['Tipo'] === tipo);
+
+    // Inicializa os objetos para cada tipo de segmento
+    dataFII.forEach(item => {
+        const segmento = item['Segmento'];
+        if (!segmentos[segmento]) {
+            segmentos[segmento] = 0;
+            accumulatedValues[segmento] = 0;
+        }
+    });
+
+    // Calcula os valores acumulados por segmento
+    dataFII.forEach(item => {
+        const segmento = item['Segmento'];
+        const valorPago = parseFloat(item['Valor_Pago']);
+        accumulatedValues[segmento] += valorPago;
+    });
+
+    // Soma total dos valores para calcular percentuais
+    const totalValue = Object.values(accumulatedValues).reduce((total, value) => total + value, 0);
+
+    // Prepara os dados para o gráfico de rosca
+    const labels = [];
+    const dataValues = [];
+    const backgroundColors = [];
+
+    Object.keys(segmentos).forEach(segmento => {
+        const valor = accumulatedValues[segmento];
+        const percentual = (valor / totalValue) * 100;
+        labels.push(`${segmento} (${percentual.toFixed(2)}%)`);
+        dataValues.push(valor);
+        backgroundColors.push(getRandomColor());
+    });
+
+    // Criação do gráfico
+
+    if (tipo == 'Ação') {
+        tipo = 'Acao';
+    }
+
+    const elementNew = 'graficoSegmento'+tipo;
+    const ctx = document.getElementById(elementNew).getContext('2d');
+    new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+            labels: labels,
+            datasets: [{
+                data: dataValues,
+                backgroundColor: backgroundColors,
+                borderWidth: 1
+            }]
+        },
+        options: {
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: legendaPosicao
+                },
+                title: {
+                    display: false,
+                    text: 'Distribuição do Patrimônio por Segmento'
+                },
+                datalabels: {
+                    display: true,
+                    color: '#202020', // Cor do texto
+                    font: {
+                        size: 12
+                    },
+                    formatter: function(value, context) {
+                        return labels[context.dataIndex] + ': ' + value.toFixed(2) + '%';
+                    }
+                }
+            }
+        }
+    });
+}
+
+
+
+
+
 function plotTipoGraph(data) {
     const segmentos = {}; // Objeto para armazenar os valores agrupados por segmento
     let accumulatedValues = {}; // Objeto para armazenar os valores acumulados por segmento
@@ -403,7 +616,7 @@ function plotTipoGraph(data) {
     // Calcula os valores acumulados por segmento
     data.forEach(item => {
         const segmento = item['Tipo'];
-        const valorPago = parseFloat(item['Valor Pago']);
+        const valorPago = parseFloat(item['Valor_Pago']);
         accumulatedValues[segmento] += valorPago;
     });
 
@@ -547,7 +760,7 @@ function parseDate(dateStr) {
 
 // Função para gerar tons de cinza aleatórios
 function getRandomColor() {
-    const grayValue = Math.floor(Math.random() * 256); // Gera um valor entre 0 e 255 para tons de cinza
+    const grayValue = Math.floor(Math.random() * 250); // Gera um valor entre 0 e 255 para tons de cinza
     const grayHex = grayValue.toString(16).padStart(2, '0'); // Converte o valor para hexadecimal e adiciona um zero à esquerda, se necessário
     return `#${grayHex}${grayHex}${grayHex}`; // Retorna a cor hexadecimal com componentes R, G e B iguais
 }

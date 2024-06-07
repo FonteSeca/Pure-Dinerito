@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adicionar Dados</title>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script type="module" src="dados.js"></script> <!-- Certifique-se de ajustar o caminho corretamente -->
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <script type="module" src="https://unpkg.com/@supabase/supabase-js@2"></script>
+</head>
+<body>
+    <script type="module" src="dados.js"></script>
+    <script type="module" src="addMov.js"></script>
+
+    <h1>Adicionar Nova Movimentação</h1>
+    <form id="addDataForm">
+        <label for="operacao">Operação:</label>
+        <select id="operacao" name="operacao">
+            <option value="compra">Compra</option>
+            <option value="venda">Venda</option>
+        </select><br><br>
+        <label for="data">Data:</label>
+        <input type="date" id="data" name="data" required><br><br>
+        <label for="ticket">Ticket:</label>
+        <input type="text" id="ticket" name="ticket" required><br><br>
+        <label for="quantidade">Quantidade:</label>
+        <input type="number" id="quantidade" name="quantidade" required><br><br>
+        <label for="valorUnitario">Valor Unitário:</label>
+        <input type="number" step="0.01" id="valorUnitario" name="valorUnitario" required><br><br>
+        <button type="submit">Adicionar Movimentação</button>
+    </form>
+</body>
+</html>
