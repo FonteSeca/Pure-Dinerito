@@ -167,51 +167,40 @@
                         </div>
                     </div>
 
+                
+                
+                    <div style="grid-column: 1 / span 4;">
+                        <label for="timeFilter">Filtro de Tempo:</label>
+                        <select id="timeFilter">
+                            <option value="monthly">Mensal</option>
+                            <option value="annual">Anual</option>
+                        </select>
+                
+                        <label for="typeFilter">Tipo de Operação:</label>
+                        <select id="typeFilter">
+                            <option value="all">Todos</option>
+                            <option value="Rendimento">Rendimento</option>
+                            <option value="JCP">JCP</option>
+                        </select>
+                
+                        <label for="ticketFilter">Filtrar por Ticket:</label>
+                        <select id="ticketFilter">
+                            <!-- As opções serão preenchidas dinamicamente pelo JavaScript -->
+                        </select>
+                
+                        <!-- Adicione um select para o filtro de tipo de Ticket -->
+                        <label for="tipoTicketFilter">Tipo de Ticket:</label>
+                        <select id="tipoTicketFilter">
+                        <option value="all">Todos</option>
+                        </select>               
+                
+                
+                        <button id="applyFilters">Aplicar Filtros</button>
+                    </div>
                 </div>
                 
+                           
                 
-                <div class="card">
-
-                </div>
-                
-                
-                <div class="grafico-segmento">
-
-                    <canvas id="graficoSegmento"></canvas>
-                </div>
-                
-            </div>
-            <div>
-                <label for="timeFilter">Filtro de Tempo:</label>
-                <select id="timeFilter">
-                    <option value="monthly">Mensal</option>
-                    <option value="annual">Anual</option>
-                </select>
-        
-                <label for="typeFilter">Tipo de Operação:</label>
-                <select id="typeFilter">
-                    <option value="all">Todos</option>
-                    <option value="Rendimento">Rendimento</option>
-                    <option value="JCP">JCP</option>
-                </select>
-        
-                <label for="ticketFilter">Filtrar por Ticket:</label>
-                <select id="ticketFilter">
-                    <!-- As opções serão preenchidas dinamicamente pelo JavaScript -->
-                </select>
-        
-                <!-- Adicione um select para o filtro de tipo de Ticket -->
-                <label for="tipoTicketFilter">Tipo de Ticket:</label>
-                <select id="tipoTicketFilter">
-                <option value="all">Todos</option>
-                </select>
-                
-        
-        
-                <button id="applyFilters">Aplicar Filtros</button>
-            </div>
-            <div class="proventos">
-                <canvas id="graficoProventos" width="400" height="200"></canvas>
             </div>
             
         </div>
