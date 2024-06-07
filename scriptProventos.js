@@ -405,7 +405,11 @@ function updateFiltersAndRender(proventosData, carteiraData) {
     const tipoTicketFilter = 'all';
     const filteredData = filterData(proventosData, timeFilter, typeFilter, ticketFilter, tipoTicketFilter);
 
-    renderTableProventos(filteredData, 'tabela-proventos');
+
+    if (checkElementById('tabela-proventos') === true) {
+        renderTableProventos(filteredData, 'tabela-proventos');
+    }
+    
     // renderTable(filteredData);
     plotProventosGraph(filteredData, timeFilter, typeFilter, ticketFilter, tipoTicketFilter);
 }

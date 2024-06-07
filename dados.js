@@ -134,7 +134,7 @@ function calcularProventosPagos(proventosData) {
 async function atualizarCarteira(carteiraData, cotasAdquiridas, valorTestePago, proventosPagos) {
     // Mapeia cada item da carteira e atualiza os valores conforme necessário
 
-    console.log('Carteira Desatualizada: ', carteiraData);
+    // console.log('Carteira Desatualizada: ', carteiraData);
     return carteiraData.map(item => {
         const ticket = item.Ticket;
     
@@ -168,7 +168,7 @@ async function atualizarCarteiraAsync(carteiraData, cotasAdquiridas, valorPago, 
     try {
         const carteiraAtualizada = await atualizarCarteira(carteiraData, cotasAdquiridas, valorPago, proventosPagos);
 
-        console.log('Carteira Atualizada:', carteiraAtualizada);
+        // console.log('Carteira Atualizada:', carteiraAtualizada);
         return carteiraAtualizada;
     } catch (error) {
         throw new Error('Erro ao atualizar carteira: ' + error.message);
@@ -189,11 +189,11 @@ async function carregarEProcessarDados() {
         const proventosPagos = await calcularProventosPagos(proventosData);
 
 
-        console.log('Valores calculados:', valorPago);
+        // console.log('Valores calculados:', valorPago);
 
-        console.log('Cotas Adquiridas:', cotasAdquiridas);
+        //console.log('Cotas Adquiridas:', cotasAdquiridas);
 
-        console.log('Proventos Pagos:', proventosPagos);
+        // console.log('Proventos Pagos:', proventosPagos);
 
         //let teste = await atualizarCarteira(carteiraData, cotasAdquiridas, valorPago, proventosPagos)
         //console.log('Carteira Atualizada:', teste);
@@ -201,13 +201,13 @@ async function carregarEProcessarDados() {
         const carteiraAtualizada = await atualizarCarteiraAsync(carteiraData, cotasAdquiridas, valorPago, proventosPagos);
 
 
-        console.log('Carteira Atualizada:', carteiraAtualizada);
+        // console.log('Carteira Atualizada:', carteiraAtualizada);
 
 
     
         const globalData = { carteira: carteiraAtualizada, movimentacao: movimentacaoData, proventos: proventosData };
     
-        console.log('Dados atualizados:', globalData);
+        // console.log('Dados atualizados:', globalData);
         
         // Exportando globalData para o próximo script
         return globalData;
