@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Proventos</title>
+    <title>Dinerito - Proventos</title>
     <link rel="stylesheet" href="style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -106,48 +106,146 @@
                             <span>0,95%</span>
                         </div>
         
-                    </div>
                     
-                    <h1>Proventos</h1>
-                    <div>
-                        <label for="timeFilter">Filtro de Tempo:</label>
-                        <select id="timeFilter">
-                            <option value="monthly">Mensal</option>
-                            <option value="annual">Anual</option>
-                        </select>
-                
-                        <label for="typeFilter">Tipo de Operação:</label>
-                        <select id="typeFilter">
-                            <option value="all">Todos</option>
-                            <option value="Rendimento">Rendimento</option>
-                            <option value="JCP">JCP</option>
-                        </select>
-                
-                        <label for="ticketFilter">Filtrar por Ticket:</label>
-                        <select id="ticketFilter">
-                            <!-- As opções serão preenchidas dinamicamente pelo JavaScript -->
-                        </select>
-                
-                        <!-- Adicione um select para o filtro de tipo de Ticket -->
-                        <label for="tipoTicketFilter">Tipo de Ticket:</label>
-                        <select id="tipoTicketFilter">
-                        <option value="all">Todos</option>
-                        </select>
+                        <div style="grid-column: 1 / span 4">
+
+                            <h1>Proventos</h1>
+                            
+                            <div>
+                                <label for="timeFilter"></label>
+                                <select id="timeFilter">
+                                    <option value="monthly">Mensal</option>
+                                    <option value="annual">Anual</option>
+                                </select>
                         
-                
-                
-                        <button id="applyFilters">Aplicar Filtros</button>
-                    </div>
-                    <div class="proventos">
-                        <div class="grafico-proventos">
-    
-                            <canvas id="graficoProventos"></canvas>
+                                <label for="typeFilter"></label>
+                                <select id="typeFilter">
+                                    <option value="all">Todos as operações</option>
+                                    <option value="Rendimento">Rendimento</option>
+                                    <option value="JCP">JCP</option>
+                                </select>
+                        
+                                <label for="ticketFilter"></label>
+                                <select id="ticketFilter">
+                                    <!-- As opções serão preenchidas dinamicamente pelo JavaScript -->
+                                </select>
+                        
+                                <!-- Adicione um select para o filtro de tipo de Ticket -->
+                                <label for="tipoTicketFilter"></label>
+                                <select id="tipoTicketFilter">
+                                <option value="all">Todos os Tipos de Ticker</option>
+                                </select>                                                  
+                        
+                                <button id="applyFilters">Aplicar Filtros</button>
+
+                            </div>
                         </div>
-    
+                    <div class="card card-proventos">
+                        <h4>Proventos</h4>
+                        <p>Proventos por Tipo</p>
+                        <div class="proventos">
+                            <div class="grafico-proventos">
+        
+                                <canvas id="graficoProventos"></canvas>
+                            </div>
+        
+                        </div>
                     </div>
-                
+
+                    <div class="card" style="grid-column: 1 / span 4">
+                        <h4>Histórico Mensal</h4>
+                        
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Ano</th>
+                                    <th>Jan</th>
+                                    <th>Fev</th>
+                                    <th>Mar</th>
+                                    <th>Abr</th>
+                                    <th>Mai</th>
+                                    <th>Jun</th>
+                                    <th>Jul</th>
+                                    <th>Ago</th>
+                                    <th>Set</th>
+                                    <th>Out</th>
+                                    <th>Nov</th>
+                                    <th>Dez</th>
+                                    <th>Total</th>
+                                    <th>Média</th>
+                                </tr>
+                                <tr>
+                                    <td>2021</td>
+                                    <td>R$ 0,00</td>
+                                    <td>R$ 0,00</td>
+                                    <td>R$ 0,00</td>
+                                    <td>R$ 0,00</td>
+                                    <td>R$ 0,00</td>
+                                    <td>R$ 0,00</td>
+                                    <td>R$ 0,00</td>
+                                    <td>R$ 0,00</td>
+                                    <td>R$ 0,00</td>
+                                    <td>R$ 0,00</td>
+                                    <td>R$ 0,00</td>
+                                    <td>R$ 0,00</td>
+                                    <td>R$ 0,00</td>
+                                    <td>R$ 0,00</td>
+                                </tr>
+                                <tr>
+                                    <td>2022</td>
+                                    <td>R$ 0,00</td>
+                                    <td>R$ 0,00</td>
+                                    <td>R$ 0,00</td>
+                                    <td>R$ 0,00</td>
+                                    <td>R$ 0,00</td>
+                                    <td>R$ 0,00</td>
+                                    <td>R$ 0,00</td>
+                                    <td>R$ 0,00</td>
+                                    <td>R$ 0,00</td>
+                                    <td>R$ 0,00</td>
+                                    <td>R$ 0,00</td>
+                                    <td>R$ 0,00</td>
+                                    <td>R$ 0,00</td>
+                                    <td>R$ 0,00</td>
+                                </tr>
+                                <tr>
+                                    <td>2023</td>
+                                    <td>R$ 0,00</td>
+                                    <td>R$ 0,00</td>
+                                    <td>R$ 0,00</td>
+                                    <td>R$ 0,00</td>
+                                    <td>R$ 0,00</td>
+                                    <td>R$ 0,00</td>
+                                    <td>R$ 0,00</td>
+                                    <td>R$ 0,00</td>
+                                    <td>R$ 0,00</td>
+                                    <td>R$ 0,00</td>
+                                    <td>R$ 0,00</td>
+                                    <td>R$ 0,00</td>
+                                    <td>R$ 0,00</td>
+                                    <td>R$ 0,00</td>
+                                </tr>
+                            </thead>
+                            
+                        </table>
+                    </div>
+
+                    <div style="grid-column: 1 / span 4">
+
+                        <button id="">Adicionar Dividendo +</button>
+                    </div>
+
+                    <div class="" style="grid-column: 1 / span 4">
                     
-                    <div id="tabela"></div>
+                        <div id="tabela-proventos"></div>
+                    </div>
+
+                    <div id="tabela-proventos"></div>
+
+                    <div id="tabela" style="display: none;"></div>
+
+                
+                </div>
                     
                 </div>
                 
@@ -164,6 +262,7 @@
     
 
     <script type="module" src="dados.js"></script>
+    <script type="module" src="script.js"></script>
     <script type="module" src="scriptProventos.js"></script>
 </body>
 </html>

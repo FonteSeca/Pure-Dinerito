@@ -108,60 +108,86 @@
                         <h4>Dividend Yield</h4>
                         <span>0,95%</span>
                     </div>
-    
-                    <div class="card evolucao-patrimonial">
-                        <h4>Valor Patrimonial</h4>
+
+                    <div id="tabela" style="grid-column: 1 / span 4;"></div>
+                    
+                    <div style="grid-column: 1 / span 4;">
+                        <div>
+                    
+                            <label for="typeFilter"></label>
+                            <select id="typeFilter">
+                                <option value="all">Todos os tickers</option>
+                                <option value="Rendimento">CPLE6</option>
+                                <option value="JCP">BCFF11</option>
+                            </select>
+                    
+                            <label for="ticketFilter"></label>
+                            <select id="ticketFilter">
+                                <option value="all">Todos as operações</option>
+                                <option value="Rendimento">Compra</option>
+                                <option value="Rendimento">Venda</option>
+                            </select>
+                    
+                            <!-- Adicione um select para o filtro de tipo de Ticket -->
+                            <label for="tipoTicketFilter"></label>
+                            <select id="tipoTicketFilter">
+                            <option value="all">Todos os Tipos de Ticker</option>
+                            <option value="all">FII</option>
+                            <option value="all">Ação</option>
+                            </select>
+
+                            <button id="applyFilters">Aplicar Filtros</button>
+                            
+                            <button id="">Adicionar Transação +</button>
+                        </div>
+                    </div>  
+                    
+                    <div style="grid-column: 1 / span 4;">
+                        <table>
+                            <tr>
+                                <th>Ticker</th>
+                                <th>Operação</th>
+                                <th>Data</th>
+                                <th>Quantidade</th>
+                                <th>Valor Unitário</th>
+                                <th>Valor Total</th>
+                            </tr>
+                            <tr>
+                                <td>CPLE6</td>
+                                <td>Compra</td>
+                                <td>00/00/0000</td>
+                                <td>00</td>
+                                <td>R$ 00,00</td>
+                                <td>R$ 000,00</td>
+                            </tr>
+                            <tr>
+                                <td>CPLE6</td>
+                                <td>Compra</td>
+                                <td>00/00/0000</td>
+                                <td>00</td>
+                                <td>R$ 00,00</td>
+                                <td>R$ 000,00</td>
+                            </tr>
+                            <tr>
+                                <td>CPLE6</td>
+                                <td>Compra</td>
+                                <td>00/00/0000</td>
+                                <td>00</td>
+                                <td>R$ 00,00</td>
+                                <td>R$ 000,00</td>
+                            </tr>
+                            <tr>
+                                <td>CPLE6</td>
+                                <td>Compra</td>
+                                <td>00/00/0000</td>
+                                <td>00</td>
+                                <td>R$ 00,00</td>
+                                <td>R$ 000,00</td>
+                            </tr>
+                        
+                        </table>
                     </div>
-                    <div class="card categoria-patrimonial">
-                        <h4>Valor Patrimonial</h4>
-                    </div>
-                </div>
-                <div id="tabela"></div>
-                <div>
-                    <table>
-                        <tr>
-                            <th>Ticker</th>
-                            <th>Operação</th>
-                            <th>Data</th>
-                            <th>Quantidade</th>
-                            <th>Valor Unitário</th>
-                            <th>Valor Total</th>
-                        </tr>
-                        <tr>
-                            <td>CPLE6</td>
-                            <td>Compra</td>
-                            <td>00/00/0000</td>
-                            <td>00</td>
-                            <td>R$ 00,00</td>
-                            <td>R$ 000,00</td>
-                        </tr>
-                        <tr>
-                            <td>CPLE6</td>
-                            <td>Compra</td>
-                            <td>00/00/0000</td>
-                            <td>00</td>
-                            <td>R$ 00,00</td>
-                            <td>R$ 000,00</td>
-                        </tr>
-                        <tr>
-                            <td>CPLE6</td>
-                            <td>Compra</td>
-                            <td>00/00/0000</td>
-                            <td>00</td>
-                            <td>R$ 00,00</td>
-                            <td>R$ 000,00</td>
-                        </tr>
-                        <tr>
-                            <td>CPLE6</td>
-                            <td>Compra</td>
-                            <td>00/00/0000</td>
-                            <td>00</td>
-                            <td>R$ 00,00</td>
-                            <td>R$ 000,00</td>
-                        </tr>
-                       
-                    </table>
-                </div>
+            </div>
     
                 
             </div>

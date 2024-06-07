@@ -109,8 +109,46 @@
                         <span>0,95%</span>
                     </div>
 
+                    <div style="grid-column: 1 / span 4;">
+                        <div>
+                    
+                            <label for="typeFilter"></label>
+                            <select id="typeFilter">
+                                <option value="all">Todos os tipos</option>
+                                <option value="Rendimento">FII</option>
+                                <option value="JCP">Ação</option>
+                            </select>
+                    
+                            <label for="ticketFilter"></label>
+                            <select id="ticketFilter">
+                                <option value="all">Todos as gestoras</option>
+                                <option value="Rendimento">Kinea</option>
+                                <option value="Rendimento">Vinci</option>
+                            </select>
+                    
+                            <!-- Adicione um select para o filtro de tipo de Ticket -->
+                            <label for="tipoTicketFilter"></label>
+                            <select id="tipoTicketFilter">
+                            <option value="all">Todos os Tipos de Segmentos</option>
+                            <option value="all">Renda Urbana</option>
+                            <option value="all">Logística</option>
+                            </select>
+
+                            <!-- Adicione um select para o filtro de tipo de Ticket -->
+                            <label for="tipoTicketFilter"></label>
+                            <select id="tipoTicketFilter">
+                            <option value="all">Todos os Tipos de Grupos</option>
+                            <option value="all">Fundo de Tijolo</option>
+                            <option value="all">Fundo de Papel</option>
+                            </select>
+
+                            <button id="applyFilters">Aplicar Filtros</button>
+
+                        </div>
+                    </div>  
+
                     <div class="" style="grid-column: 1 / span 3;">
-                        <div id="tabela"></div>
+                        
                         <div>
                             <table>
                                 <tr>
@@ -118,7 +156,16 @@
                                     <th>Quantidade</th>
                                     <th>Preço Médio</th>
                                     <th>Valor Aplicado</th>
-                                    <th>Valor Valor Patrimonial</th>
+                                    <th>Valor Patrimonial</th>
+                                    <th>Variação</th>
+                                </tr>
+                                <tr>
+                                    <td><a href="ativo.html">KNCS11 - Kinea Securities</a></td>
+                                    <td>000</td>
+                                    <td>R$ 0,00</td>
+                                    <td>R$ 00.000,00</td>
+                                    <td>R$ 00.000,00</td>
+                                    <td>R$ 00,00 / 0,00% ↗</td>
                                 </tr>
                                 <tr>
                                     <td>CPLE6 - Copel</td>
@@ -126,6 +173,7 @@
                                     <td>R$ 0,00</td>
                                     <td>R$ 00.000,00</td>
                                     <td>R$ 00.000,00</td>
+                                    <td>R$ 00,00 / 0,00% ↘</td>
                                 </tr>
                                 <tr>
                                     <td>CPLE6 - Copel</td>
@@ -133,6 +181,7 @@
                                     <td>R$ 0,00</td>
                                     <td>R$ 00.000,00</td>
                                     <td>R$ 00.000,00</td>
+                                    <td>R$ 00,00 / 0,00% ↘</td>
                                 </tr>
                                 <tr>
                                     <td>CPLE6 - Copel</td>
@@ -140,6 +189,7 @@
                                     <td>R$ 0,00</td>
                                     <td>R$ 00.000,00</td>
                                     <td>R$ 00.000,00</td>
+                                    <td>R$ 00,00 / 0,00% ↗</td>
                                 </tr>
                                 <tr>
                                     <td>CPLE6 - Copel</td>
@@ -147,21 +197,20 @@
                                     <td>R$ 0,00</td>
                                     <td>R$ 00.000,00</td>
                                     <td>R$ 00.000,00</td>
-                                </tr>
-                                <tr>
-                                    <td>CPLE6 - Copel</td>
-                                    <td>000</td>
-                                    <td>R$ 0,00</td>
-                                    <td>R$ 00.000,00</td>
-                                    <td>R$ 00.000,00</td>
+                                    <td>R$ 00,00 / 0,00% </td>
                                 </tr>
                             </table>
                         </div>
+                        <div id="tabela-carteira"></div>
                     </div>
                     <div>
                         <div class="card">
-                            <canvas id="graficoTipo" width="400" height="200" style="max-width: 800px;"></canvas>
-                            <canvas id="graficoSegmento" width="400" height="200" style="max-width: 800px;"></canvas>
+                            <h4>Carteira</h4>
+                            <p>Carteira por Tipo de Ativo</p>
+                            <div>
+                                <canvas id="graficoTipo"></canvas>
+                            </div>
+                           <!--   <canvas id="graficoSegmento"></canvas> -->
                         </div>
                         
                     </div>
@@ -169,10 +218,10 @@
 
                 
                 
-                <canvas id="graficoProventos" width="400" height="200"></canvas>
+               <!--  <canvas id="graficoProventos" ></canvas>
                 
-                <canvas id="graficoPatrimonio" width="400" height="200"></canvas>
-                
+                <canvas id="graficoPatrimonio" ></canvas>
+                 -->
                 
             </div>
             

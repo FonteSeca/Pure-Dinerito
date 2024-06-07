@@ -116,19 +116,19 @@ hr {
   border: 1px solid #E3E5E7;
   border-radius: 10px;
 
-  h4 {
+  > h4 {
       font-size: 12px;
       text-transform: uppercase;
       font-weight: 800;
   }
 
-  span {
+  > span {
       font-size: 30px;
       text-transform: uppercase;
       font-weight: 200;
   }
 
-  p {
+  > p {
       font-size: 10px;
       font-weight: 500;
   }
@@ -167,13 +167,13 @@ label {
 button {
   cursor: pointer;
   background-color: #EAEAEC;
-  padding: 10px 15px;
+  padding: 5px 10px;
   border: 1px solid black;
 
-  font-size: 12px;
+  font-size: 10px;
   font-weight: 800;
   text-transform: uppercase;
-  border-radius: 10px;
+  border-radius: 5px;
   transition: 0.3s all;
 
   &.confirm-button {
@@ -221,9 +221,17 @@ button {
   }
 }
 
+.positivo {
+  color: #24AB21 !important;
+}
+
+.negativo {
+  color: #C03A3A !important;
+}
+
 /* TABLE */
 
-/* Estilizando a tabela */
+/* Estilizando a tabela *//* 
 table-container {
   margin-top: 20px;
 }
@@ -295,7 +303,268 @@ table tr:nth-child(even) {
 
 table tr:hover {
   background-color: #e0e0e0;
+} */
+
+/* TABLE */
+
+/* Estilizando a tabela */
+table-container {
+  margin-top: 20px;
 }
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  border: none;
+  border-radius: 5px;
+  overflow: hidden;
+
+  background-color: white;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.025);
+  border: 1px solid #E3E5E7;
+
+  thead {
+      font-size: 11px;
+      color: rgba(black, 0.6);
+      font-weight: 700;
+      text-transform: uppercase;
+  }
+
+  tr {
+      border-radius: 10px;
+      margin-bottom: 1px;
+      background-color: rgba(0, 0, 0, 0.02);
+      border-spacing: 1px;
+
+      th {
+          font-size: 12px;
+          color: rgba(32,32,32, 0.6);
+          font-weight: 700;
+          text-transform: uppercase;
+          
+          text-align: center;
+      }
+
+      td {
+          font-size: 12px;
+          color: rgba(32,32,32, 0.4);
+          font-weight: 500;
+          text-transform: uppercase;
+          
+          text-align: center;
+      }
+  }
+
+  
+}
+
+table th,
+table td {
+  padding: 10px 5px;
+  text-align: left;
+  
+}
+
+table th {
+  background-color: #FFFFFF;
+  text-transform: uppercase;
+  font-size: 10px;
+  font-weight: 700;
+  color: rgba(0, 0, 0, 0.4)
+}
+
+table td {
+  color: rgba(32, 32, 32, 0.5);
+  font-size: 10px;
+  font-weight: 600;
+}
+
+table tr:nth-child(even) {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+table tr:hover {
+  background-color: rgba(0, 0, 0, 0.08);
+}
+
+
+/* PÁGINA ATIVO */
+/* Página */
+
+.info-top-ativo {
+  display: flex;
+  justify-content: space-between;
+
+  .label-ticker {
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    background-color: #7B7B7B;
+    color: #FFF;
+    padding: 5px 10px;
+    display: inline-block;
+    border-radius: 5px;
+  }
+
+  .label-name-ticker {
+    font-size: 14px;
+    font-weight: 300;
+    color: #7B7B7B;
+    display: inline-block;
+  }
+
+  .valor-medio-ticker {
+    font-size: 48px;
+    font-weight: 700;
+    color: rgba(32,32,32, 0.9);
+    display: inline-block;
+  }
+
+  .variacao-medio-ticker {
+    font-size: 14px;
+    font-weight: 500;
+    
+    background-color: rgba(36, 171, 33, 0.25);
+    display: inline-block;
+    padding: 10px 15px;
+    border-radius: 5px;
+  }
+}
+
+
+
+/* Tabela de Info do Ativo */
+.info-ativo {
+  display: flex;
+  justify-content: space-between;
+
+
+  table {
+    width: 100%;
+  
+    border-collapse: collapse;
+    border: none;
+
+    thead {
+        font-size: 10px;
+        color: rgba(black, 0.4);
+        font-weight: 700;
+        text-transform: uppercase;
+    }
+
+    tr {
+        border-radius: 10px;
+        margin-bottom: 1px;
+        border-spacing: 1px;
+
+        th {
+            font-size: 10px;
+            color: rgba(32,32,32, 0.4);
+            
+            text-transform: uppercase;
+            text-align: center;
+        }
+
+        td {
+            font-size: 11px;
+            color: rgba(32,32,32, 0.5);
+            font-weight: 700;
+            text-transform: uppercase;
+            text-align: center;
+            
+            span {
+              color: rgba(32,32,32, 0.9);
+            }
+        }
+
+        td:first-child {
+          width: 50%;
+          text-align: left;
+        }
+
+        td:last-child {
+          width: 50%;
+          text-align: right;
+        }
+    }
+  }
+
+
+  table th,
+  table td {
+    padding: 15px 10px 15px 10px;
+    text-align: left;
+    
+  }
+
+  table th {
+    background-color: #FFFFFF;
+    text-transform: uppercase;
+    font-size: 10px;
+    font-weight: 700;
+    color: rgba(0, 0, 0, 0.4)
+  }
+
+  table td {
+    color: rgba(32, 32, 32, 0.5);
+    font-size: 10px;
+    font-weight: 700;
+  }
+
+  table tr:nth-child(even) {
+
+  }
+
+  table tr:hover {
+
+  }
+}
+
+
+/* Tabela de Info do Ativo */
+.sobre-ativo {
+  hr {
+    background-color: rgba(82, 82, 82, 0.2);
+  }
+
+  .sobre-ativo-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+
+    span {
+      text-transform: uppercase;
+      font-size: 14px;
+      font-weight: 700;
+      color: rgba(0, 0, 0, 0.4);
+      display: block;
+    }
+    h4 {
+      font-size: 16px;
+      font-weight: 800 ;
+    }
+   
+    
+    .icon {
+      background-color: #525252;
+      width: 50px;
+      height: 50px;
+
+      border-radius: 5px;
+  
+      -ativo-razao {
+        
+      }
+    }
+    
+  }
+
+}
+
+
+
+
+
 
 
 
@@ -412,9 +681,11 @@ canvas {
     }
   }
 
-  .card-proventos {
+  .card-proventos, .valor-segmento-fii, .valor-segmento-acao {
     grid-column: 1 / span 2;
   }
+
+  
 }
 
 /* 
@@ -444,7 +715,7 @@ canvas {
     }
   }
 
-  .card-proventos {
+  .card-proventos, .valor-segmento-fii, .valor-segmento-acao {
     grid-column: auto;
   }
 }

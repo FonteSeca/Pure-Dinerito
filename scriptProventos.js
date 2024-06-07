@@ -334,7 +334,7 @@ function updateTicketFilterOptions(data) {
     // Adiciona a opção "Todos"
     const allOption = document.createElement('option');
     allOption.value = 'all';
-    allOption.textContent = 'Todos';
+    allOption.textContent = 'Todos os Tickers';
     ticketFilterSelect.appendChild(allOption);
 
     // Extrai uma lista de tickets únicos dos dados
@@ -375,7 +375,7 @@ function updateTipoTicketFilterOptions(dataCarteira) {
 
     const allOption = document.createElement('option');
     allOption.value = 'all';
-    allOption.textContent = 'Todos';
+    allOption.textContent = 'Todoss Tipos de Tickers';
     tipoTicketFilterSelect.appendChild(allOption);
 
     const uniqueTipoTickets = extractUniqueTipoTickets(dataCarteira);

@@ -11,14 +11,71 @@ const supabase = createClient(supabaseUrl, supabaseKey)
 import { globalDatas as globalDatae } from "./dados.js";
 
 // Agora você pode usar globalDatae neste script
-console.log(globalDatae);
+
 
 let globalData = globalDatae;
 
-renderTable(globalData.movimentacao);
-plotGraph(globalData.movimentacao);
-plotSegmentoGraph(globalData.carteira);
-plotTipoGraph(globalData.carteira);
+console.log(globalData);
+
+// renderTable(globalData.movimentacao);
+
+
+
+
+
+function checkElementById(elementId) {
+    const element = document.getElementById(elementId);
+    if (element) {
+        console.log(`O elemento com ID "${elementId}" existe na página.`);
+        return true;
+    } else {
+        console.log(`O elemento com ID "${elementId}" não existe na página.`);
+        return false;
+    }
+}
+
+// Exemplo de uso:
+verifica();
+
+function verifica() {
+    if (checkElementById('tabela-carteira') === true) {
+        
+        renderTableCarteira(globalData.carteira, 'tabela-carteira');
+    }
+    
+    if (checkElementById('tabela-transacao') === true) {
+        listarDados(globalData.transacao, 'tabela-transacao');
+    }
+    
+    if (checkElementById('tabela-proventos') === true) {
+        listarDados(globalData.proventos, 'tabela-proventos');
+    }
+
+    if (checkElementById('graficoPatrimonio') === true) {
+        plotGraph(globalData.movimentacao);
+    }
+
+    if (checkElementById('graficoSegmento') === true) {
+        plotSegmentoGraph(globalData.carteira);
+    }
+
+    if (checkElementById('graficoTipo') === true) {
+        plotTipoGraph(globalData.carteira);
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -80,6 +137,50 @@ function aasrenderTable(data) {
         `;
     });
     document.getElementById('tabela').appendChild(table);
+}
+
+
+function renderTableCarteira(data, idElemento) {
+    const table = document.createElement('table');
+    table.innerHTML = `
+        <tr>
+            <th>Ticker</th>
+            <th>Quantidade</th>
+            <th>Preço Médio</th>
+            <th>Valor Aplicado</th>
+            <th>Valor Patrimonial</th>
+            <th>Variação</th>
+        </tr>
+    `;
+    data.forEach(item => {
+        const valorUnitario = parseFloat(item['Valor Unitario']);
+        const quantidade = parseFloat(item['Quantidade']);
+        const valorPago = item['Cotas Adquiridas'] * 3;
+        const valorPatrimonial = item['Cotas Adquiridas'] * 4;
+        item['Valor Pago'] = valorPago.toFixed(2);
+
+        const variacaoValor = valorPatrimonial - valorPago;
+        const variacaoPercentual = ((valorPatrimonial - valorPago) / valorPago) * 100;;
+
+        const simboloVariacao = variacaoPercentual > 0 ? '↗' : variacaoPercentual < 0 ? '↘' : '';
+        const classeVariacao = variacaoPercentual > 0 ? 'positivo' : variacaoPercentual < 0 ? 'negativo' : 'neutro';
+
+
+        if(variacaoValor < 0) {
+
+        }
+        table.innerHTML += `
+            <tr>
+                <td>${item['Ticket']}</td>
+                <td>${item['Cotas Adquiridas']}</td>
+                <td>${item['Ticket']}</td>
+                <td>R$ ${valorPago}</td>
+                <td>R$ ${valorPatrimonial}</td>
+                <td class="${classeVariacao}">R$ ${variacaoValor} / ${variacaoPercentual.toFixed(2)}% ${simboloVariacao}</td>
+            </tr>
+        `;
+    });
+    document.getElementById(idElemento).appendChild(table);
 }
 
 function plotGraph(data) {
@@ -471,3 +572,24 @@ function calcularValorTotalPago(movimentacoes) {
 
 const totalPago = calcularValorTotalPago(globalData.movimentacao);
 document.getElementById('valor-aplicado-text').innerText = totalPago.toFixed(2);
+
+function listarDados(tipoDado, idElemento) {
+    
+    const table = document.createElement('table');
+    const headerRow = table.insertRow();
+    for (const key in tipoDado[0]) {
+        const headerCell = document.createElement('th');
+        headerCell.textContent = key;
+        headerRow.appendChild(headerCell);
+    }
+    tipoDado.forEach(item => {
+        const row = table.insertRow();
+        for (const key in item) {
+            const cell = row.insertCell();
+            cell.textContent = item[key];
+        }
+    });
+    document.getElementById(idElemento).appendChild(table);
+}
+
+

@@ -88,124 +88,238 @@
         <Header></Header>
 
         <div>
-            <div class="dashboard-screen">
+            <div class="ativo-screen">
             
 
                 <div class="grid-container">
-                    <div class="card" style="grid-column: 1 / span 4;">
-                        <span>CPLE6</span>
-                    </div>
-                    <div class="card">
-                        <h4>Ativos</h4>
-                        <span>R$ <span id="valor-aplicado-text"></span></span>
-                    </div>
-                    <div class="card">
-                        <h4>Valor Patrimonial</h4>
-                        <span>R$ 00.000,00</span>
-                    </div>
-                    <div class="card">
-                        <h4>Valor Patrimonial</h4>
-                        <span>12,50%</span>
-                    </div>
-                    <div class="card">
-                        <h4>Dividend Yield</h4>
-                        <span>0,95%</span>
-                    </div>
 
-                    <div class="" style="grid-column: 1 / span 3;">
-                        <div id="tabela"></div>
-                        <div>
-                            <table>
-                                <tr>
-                                    <th>Operação</th>
-                                    <th>Data</th>
-                                    <th>Quantidade</th>
-                                    <th>Valor Unitário</th>
-                                    <th>Valor Total</th>
-                                </tr>
-                                <tr>
-                                    <td>Compra</td>
-                                    <td>00/00/0000</td>
-                                    <td>00</td>
-                                    <td>R$ 00,00</td>
-                                    <td>R$ 000,00</td>
-                                </tr>
-                                <tr>
-                                    <td>Compra</td>
-                                    <td>00/00/0000</td>
-                                    <td>00</td>
-                                    <td>R$ 00,00</td>
-                                    <td>R$ 000,00</td>
-                                </tr>
-                                <tr>
-                                    <td>Compra</td>
-                                    <td>00/00/0000</td>
-                                    <td>00</td>
-                                    <td>R$ 00,00</td>
-                                    <td>R$ 000,00</td>
-                                </tr>
-                                <tr>
-                                    <td>Compra</td>
-                                    <td>00/00/0000</td>
-                                    <td>00</td>
-                                    <td>R$ 00,00</td>
-                                    <td>R$ 000,00</td>
-                                </tr>
-                               
-                            </table>
-                        </div>
-                        <div>
-                            <table>
-                                <tr>
-                                    <th>Ticker</th>
-                                    <th>Data</th>
-                                    <th>Quantidade</th>
-                                    <th>Valor Unitário</th>
-                                    <th>Valor Total</th>
-                                </tr>
-                                <tr>
-                                    <td>Compra</td>
-                                    <td>00/00/0000</td>
-                                    <td>00</td>
-                                    <td>R$ 00,00</td>
-                                    <td>R$ 000,00</td>
-                                </tr>
-                                <tr>
-                                    <td>Compra</td>
-                                    <td>00/00/0000</td>
-                                    <td>00</td>
-                                    <td>R$ 00,00</td>
-                                    <td>R$ 000,00</td>
-                                </tr>
-                                <tr>
-                                    <td>Compra</td>
-                                    <td>00/00/0000</td>
-                                    <td>00</td>
-                                    <td>R$ 00,00</td>
-                                    <td>R$ 000,00</td>
-                                </tr>
-                                <tr>
-                                    <td>Compra</td>
-                                    <td>00/00/0000</td>
-                                    <td>00</td>
-                                    <td>R$ 00,00</td>
-                                    <td>R$ 000,00</td>
-                                </tr>
-                               
-                            </table>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="card">
-                            <canvas id="graficoTipo" ></canvas>
-                            <canvas id="graficoSegmento"></canvas>
+                    <div class="card info-top-ativo" style="grid-column: 1 / span 4">
+                        <div style="width: 50%;">
+                            <div>
+
+                                <span class="label-ticker">KNSC11</span>
+                                <span class="label-name-ticker">Kinea Securities</span>
+                            </div>
+                            <div>
+
+                                <h3 class="valor-medio-ticker">9,11</h3>
+                                <span class="variacao-medio-ticker positivo">1.27 (0.83%) ↗</span>
+                            </div>
+                            
                         </div>
                         
+                        <div class="info-ativo" style="width: 50%;">
+                            
+                            <table class="tabela-valor">
+                                <tr>
+                                    <td>Preço Teto</td>
+                                    <td><span class="info-ativo-preco-teto">R$ 00,00</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Preço Médio</td>
+                                    <td><span class="info-ativo-preco-medio">R$ 00,00</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Cotação</td>
+                                    <td><span class="info-ativo-cotacao">R$ 00,00</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Valor Patrimonial</td>
+                                    <td><span class="info-ativo-vp">R$ 00,00</span></td>
+                                </tr>
+                                <tr>
+                                    <td>V/VP</td>
+                                    <td><span class="info-ativo-pvp negativo">1.09</span></td>
+                                </tr>                    
+                            </table>
+                        <table class="tabela-dy">
+                                <tr>
+                                    <td>DY 1 Mês</td>
+                                    <td><span class="info-ativo-dy-1m">R$ 00,00 / 0,00%</span></td>
+                                </tr>
+                                <tr>
+                                    <td>DY 3 Meses</td>
+                                    <td><span class="info-ativo-dy-3m">R$ 00,00 / 0,00%</span></td>
+                                </tr>
+                                <tr>
+                                    <td>DY 6 Meses</td>
+                                    <td><span class="info-ativo-dy-6m">R$ 00,00 / 0,00%</span></td>
+                                </tr>
+                                <tr>
+                                    <td>DY 12 Meses</td>
+                                    <td><span class="info-ativo-dy-12m">R$ 00,00 / 0,00%</span></td>
+                                </tr>
+                                <tr>
+                                    <td>DY 24 Meses</td>
+                                    <td><span class="info-ativo-dy-24m">R$ 00,00 / 0,00%</span></td>
+                                </tr>                    
+                            </table>
+                        </div>
+                    </div>
+
+                    
+
+
+
+                    <div class="card" style="grid-column: 1 / span 1">
+                        <div class="sobre-ativo">
+
+                            <div class="sobre-ativo-item ativo-razao-soclal">
+                                <div class="icon icon-ativo-razao"></div>
+                                <div>
+
+                                    <span>Razão Social</span>
+                                    <h4>Kinea Securities Fundo de Investimento Imobiliário</h4>
+                                </div>
+                            </div>
+                            
+                            <div class="sobre-ativo-item ativo-cnpj">
+                                <div class="icon icon-ativo-cnpj"></div>
+                                <div>
+
+                                    <span>CNPJ</span>
+                                    <h4>35.864.448/0001-38</h4>
+                                </div>
+                            </div>
+
+                            <hr>
+                            
+                            <div class="sobre-ativo-item ativo-segmento">
+                                <div class="icon icon-ativo-segmento"></div>
+                                <div>
+
+                                    <span>Gestora</span>
+                                    <h4>Kinea</h4>
+                                </div>
+                            </div>
+                            
+                            <div class="sobre-ativo-item ativo-tipo">
+                                <div class="icon icon-ativo-tipo"></div>
+                                <div>
+
+                                    <span>CNPJ da Gestora</span>
+                                    <h4>35.864.448/0001-38</h4>
+                                </div>
+                            </div>
+
+                            <hr>
+
+                            <div class="sobre-ativo-item ativo-segmento">
+                                <div class="icon icon-ativo-segmento"></div>
+                                <div>
+
+                                    <span>Segmento</span>
+                                    <h4>Renda Urbana</h4>
+                                </div>
+                            </div>
+                            
+                            <div class="sobre-ativo-item ativo-tipo">
+                                <div class="icon icon-ativo-tipo"></div>
+                                <div>
+
+                                    <span>Tipo</span>
+                                    <h4>Fundo de Tijolo</h4>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+                
+
+                <div class="card" style="grid-column: 2 / span 3;">
+                    <div id=""></div>
+                    <div>
+                        <h4>Transação</h4>
+                        <table>
+                            <tr>
+                                <th>Operação</th>
+                                <th>Data</th>
+                                <th>Quantidade</th>
+                                <th>Valor Unitário</th>
+                                <th>Valor Total</th>
+                            </tr>
+                            <tr>
+                                <td>Compra</td>
+                                <td>00/00/0000</td>
+                                <td>00</td>
+                                <td>R$ 00,00</td>
+                                <td>R$ 000,00</td>
+                            </tr>
+                            <tr>
+                                <td>Compra</td>
+                                <td>00/00/0000</td>
+                                <td>00</td>
+                                <td>R$ 00,00</td>
+                                <td>R$ 000,00</td>
+                            </tr>
+                            <tr>
+                                <td>Compra</td>
+                                <td>00/00/0000</td>
+                                <td>00</td>
+                                <td>R$ 00,00</td>
+                                <td>R$ 000,00</td>
+                            </tr>
+                            <tr>
+                                <td>Compra</td>
+                                <td>00/00/0000</td>
+                                <td>00</td>
+                                <td>R$ 00,00</td>
+                                <td>R$ 000,00</td>
+                            </tr>
+                           
+                        </table>
+                    </div>
+                    <div>
+                        <h4>Proventos</h4>
+                        <table>
+                            <tr>
+                                <th>Ticker</th>
+                                <th>Data</th>
+                                <th>Quantidade</th>
+                                <th>Valor Unitário</th>
+                                <th>Valor Total</th>
+                            </tr>
+                            <tr>
+                                <td>Compra</td>
+                                <td>00/00/0000</td>
+                                <td>00</td>
+                                <td>R$ 00,00</td>
+                                <td>R$ 000,00</td>
+                            </tr>
+                            <tr>
+                                <td>Compra</td>
+                                <td>00/00/0000</td>
+                                <td>00</td>
+                                <td>R$ 00,00</td>
+                                <td>R$ 000,00</td>
+                            </tr>
+                            <tr>
+                                <td>Compra</td>
+                                <td>00/00/0000</td>
+                                <td>00</td>
+                                <td>R$ 00,00</td>
+                                <td>R$ 000,00</td>
+                            </tr>
+                            <tr>
+                                <td>Compra</td>
+                                <td>00/00/0000</td>
+                                <td>00</td>
+                                <td>R$ 00,00</td>
+                                <td>R$ 000,00</td>
+                            </tr>
+                           
+                        </table>
                     </div>
                 </div>
 
+            </div>
+
                 
-            
+
+                
+                
                 
                 
             </div>
