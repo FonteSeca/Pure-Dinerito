@@ -1,3 +1,43 @@
+// Inicialize o cliente Supabase
+import { createClient } from 'https://esm.sh/@supabase/supabase-js@2'
+const supabaseUrl = 'https://sfvrdmhpvaluyfnbptny.supabase.co'
+const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNmdnJkbWhwdmFsdXlmbmJwdG55Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTYyNjM5ODgsImV4cCI6MjAzMTgzOTk4OH0.kj4e5YgSnlQwsH0eUR7iEhOZqgi06oD3RKMhNMqSJqg"
+const supabase = createClient(supabaseUrl, supabaseKey)
+
+// scriptUso.js
+
+import { globalDatas as globalDatae } from "./dados.js";
+
+// Agora você pode usar globalDatae neste script
+
+
+// Função assíncrona para usar os dados
+async function usarDados() {
+    try {
+        // Chama a função globalDatas para obter os dados
+        const dados = await globalDatae();
+        
+        // Retorna os dados para que possam ser usados fora da função
+        return dados;
+    } catch (error) {
+        // Em caso de erro, lida com ele de acordo com sua lógica de tratamento de erros
+        console.error('Erro ao usar os dados:', error);
+        // Retorna null em caso de erro
+        return null;
+    }
+}
+
+
+// Chama a função usarDados para começar a usar os dados
+const globalData = await usarDados();
+
+console.log('Carteira Consolidada: ', globalData);
+
+// Inicio do Código
+
+renderTableTransacao(globalData.movimentacao, 'tabela-transacao');
+
+
 
 function puxando() {
     updateFiltersAndRender(globalData.proventos, globalData.carteira);
@@ -5,36 +45,36 @@ function puxando() {
 
 
 document.getElementById('applyFilters').addEventListener('click', () => {
-    const timeFilter = document.getElementById('timeFilter').value;
-    const typeFilter = document.getElementById('typeFilter').value;
-    const ticketFilter = document.getElementById('ticketFilter').value;
+    const tickerFilter = document.getElementById('ticketFilter').value;
+    const operationFilter = document.getElementById('operationFilter').value;
     const tipoTicketFilter = document.getElementById('tipoTicketFilter').value;
 
-    console.log('Filtros selecionados:', { timeFilter, typeFilter, ticketFilter, tipoTicketFilter });
 
-    const proventosData = globalData.proventos;
-    const filteredData = filterData(proventosData, timeFilter, typeFilter, ticketFilter, tipoTicketFilter);
+    console.log('Filtros selecionados:', { tickerFilter, operationFilter, tipoTicketFilter });
+
+    const carteiraData = globalData.movimentacao;
+    const filteredData = filterData(carteiraData, tickerFilter, operationFilter, tipoTicketFilter);
 
     // renderTable(filteredData);
-    renderTableProventos(filteredData, 'tabela-proventos');
-    console.log('teste');
-    plotProventosGraph(filteredData, timeFilter, typeFilter, ticketFilter, tipoTicketFilter);
+    renderTableTransacao(filteredData, 'tabela-transacao');
+    console.log(filteredData);
+    
 });
 
 
 
 
 // Função para filtrar os dados
-function filterData(data, groupBy, filterType, filterTicket, filterTipoTicket) {
+function filterData(data, filterTicket, filterOperation, filterTipoTicket) {
     
-    console.log('Filtros aplicados:', { filterType, filterTicket, filterTipoTicket });
+    console.log('Filtros aplicados:', { filterTicket, filterOperation, filterTipoTicket});
 
     const filteredData = data.filter(item => {
         const operacao = item.Operacao;
         const ticket = item.Ticket;
         const tipoTicket = globalData.carteira.find(carteiraItem => carteiraItem.Ticket === ticket)?.Tipo;
 
-        return (filterType === 'all' || filterType === operacao) &&
+        return (filterOperation === 'all' || filterOperation === operacao) &&
                (filterTicket === 'all' || filterTicket === ticket) &&
                (filterTipoTicket === 'all' || filterTipoTicket === tipoTicket);
     });
@@ -105,15 +145,14 @@ function updateFiltersAndRender(proventosData, carteiraData) {
     updateTipoTicketFilterOptions(carteiraData);
 
     // Renderizar tabela e gráfico
-    const timeFilter = 'monthly';
-    const typeFilter = 'all';
-    const ticketFilter = 'all';
+    const ticketFilter = 'monthly';
+    const operationFilter = 'all';
     const tipoTicketFilter = 'all';
-    const filteredData = filterData(proventosData, timeFilter, typeFilter, ticketFilter, tipoTicketFilter);
+    const filteredData = filterData(proventosData, ticketFilter, operationFilter, tipoTicketFilter);
 
-    renderTableProventos(filteredData, 'tabela-proventos');
+    // renderTableCarteira(filteredData, 'tabela-proventos');
     // renderTable(filteredData);
-    plotProventosGraph(filteredData, timeFilter, typeFilter, ticketFilter, tipoTicketFilter);
+    //plotProventosGraph(filteredData, timeFilter, typeFilter, ticketFilter, tipoTicketFilter);
 }
 
 
@@ -125,7 +164,7 @@ function updateTipoTicketFilterOptions(dataCarteira) {
 
     const allOption = document.createElement('option');
     allOption.value = 'all';
-    allOption.textContent = 'Todoss Tipos de Tickers';
+    allOption.textContent = 'Todos Tipos de Tickers';
     tipoTicketFilterSelect.appendChild(allOption);
 
     const uniqueTipoTickets = extractUniqueTipoTickets(dataCarteira);
@@ -155,17 +194,58 @@ function checkElementById(elementId) {
 verifica();
 
 function verifica() {
-
-
-    
-    if (checkElementById('tabela-proventos') === true) {
-        renderTableProventos(globalData.proventos, 'tabela-proventos');
+   
+    if (checkElementById('tabela-transacao') === true) {
+        renderTableTransacao(globalData.movimentacao, 'tabela-transacao');
     }
 
 }
 
-function renderTableProventos(data, idElemento) {
-    const table = document.querySelector(`#${idElemento} table`);
+function renderTableTransacaao(data, idElemento) {
+    const table = document.createElement('table');
+    table.innerHTML = `
+        <thead>
+            <tr>
+            <th>Ticket</th>
+            <th>Operação</th>
+            <th>Data</th>
+            <th>Quantidade</th>
+            <th>Valor Unitário</th>
+            <th>Valor Total</th>
+            <th>Editar</th>
+            </tr>
+        </thead>
+    `;
+    
+    const tbody = document.createElement('tbody');
+    
+    data.forEach(item => {
+        const valorUnitario = parseFloat(item['Valor Unitario']);
+        const quantidade = parseFloat(item['Quantidade']);
+        const valorPago = valorUnitario * quantidade;
+        item['Valor Pago'] = valorPago.toFixed(2);
+
+        const row = document.createElement('tr');
+        row.innerHTML = `
+        <td>${item['Ticket']}</td>
+        <td>${item['Operacao']}</td>
+        <td>${item['Data']}</td>
+        <td>${item['Quantidade']}</td>
+        <td>R$ ${item['Valor Unitario']}</td>
+        <td>R$ ${item['Valor Pago']}</td>
+        <td><button class="btn-editar">Editar</button></td>
+        `;
+        tbody.appendChild(row);
+    });
+    
+    table.appendChild(tbody);
+    document.getElementById(idElemento).appendChild(table);
+}
+
+function renderTableTransacao(data, idElemento) {
+    const table = document.querySelector(`#tabela-transacao`);
+
+    console.log(table);
     const tbody = table.querySelector('tbody');
 
     // Limpa o conteúdo existente do tbody
@@ -179,15 +259,16 @@ function renderTableProventos(data, idElemento) {
 
         const row = document.createElement('tr');
         row.innerHTML = `
-            <td>${item['Ticket']}</td>
-            <td>${item['Operacao']}</td>
-            <td>${item['Data Com']}</td>
-            <td>${item['Data Pag']}</td>
-            <td>${item['Quantidade']}</td>
-            <td>R$ ${item['Valor Unitario']}</td>
-            <td>R$ ${item['Valor Pago']}</td>
-            <td><button class="btn-editar">Editar</button></td>
+        <td>${item['Ticket']}</td>
+        <td>${item['Operacao']}</td>
+        <td>${item['Data']}</td>
+        <td>${item['Quantidade']}</td>
+        <td>R$ ${item['Valor Unitario']}</td>
+        <td>R$ ${item['Valor Pago']}</td>
+        <td><button class="btn-editar">Editar</button></td>
         `;
         tbody.appendChild(row);
     });
 }
+
+

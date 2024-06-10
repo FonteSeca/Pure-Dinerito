@@ -15,6 +15,15 @@
 
     
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- jQuery -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <!-- DataTables CSS -->
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css">
+  <!-- DataTables JS -->
+  <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
+
+
 </head>
 <body>
     <div class="MainContainer">
@@ -22,7 +31,7 @@
         <nav>
             <ul>
                 <li>
-                   <a href="dashboard.html">
+                   <a href="/">
                         <div class="sidebar-icon">
                            
                         </div>
@@ -94,7 +103,7 @@
                 <div class="grid-container">
                     <div class="card">
                         <h4>Valor Patrimonial</h4>
-                        <span>R$ 00.000,00</span>
+                        <span id="valor-aplicado-text">R$ 00.000,00</span>
                     </div>
                     <div class="card">
                         <h4>Valor Patrimonial</h4>
@@ -109,23 +118,21 @@
                         <span>0,95%</span>
                     </div>
 
-                    <div id="tabela" style="grid-column: 1 / span 4;"></div>
+                    
                     
                     <div style="grid-column: 1 / span 4;">
                         <div>
                     
-                            <label for="typeFilter"></label>
-                            <select id="typeFilter">
-                                <option value="all">Todos os tickers</option>
-                                <option value="Rendimento">CPLE6</option>
-                                <option value="JCP">BCFF11</option>
-                            </select>
-                    
                             <label for="ticketFilter"></label>
                             <select id="ticketFilter">
+                                <option value="all">Todos os tickers</option>
+                            </select>
+                    
+                            <label for="operationFilter"></label>
+                            <select id="operationFilter">
                                 <option value="all">Todos as operações</option>
-                                <option value="Rendimento">Compra</option>
-                                <option value="Rendimento">Venda</option>
+                                <option value="Compra">Compra</option>
+                                <option value="Venda">Venda</option>
                             </select>
                     
                             <!-- Adicione um select para o filtro de tipo de Ticket -->
@@ -143,8 +150,23 @@
                     </div>  
                     
                     <div style="grid-column: 1 / span 4;">
+                        <div id="tabela-transacao">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Ticker</th>
+                                        <th>Operação</th>
+                                        <th>Data</th>
+                                        <th>Quantidade</th>
+                                        <th>Valor Unitário</th>
+                                        <th>Valor Total</th>
+                                        <th>Editar</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tbody-transacao"></tbody>
+                            </table>
+                        </div>
                     
-                        <div id="tabela-transacao"></div>
                     </div>
 
                     

@@ -466,6 +466,9 @@ function verifica() {
 
 function renderTableProventos(data, idElemento) {
     const table = document.querySelector(`#${idElemento} table`);
+
+    console.log(table);
+
     const tbody = table.querySelector('tbody');
 
     // Limpa o conteúdo existente do tbody

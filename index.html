@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Visualização de Dados</title>
+    <title>Dinerito - Dashboard</title>
+    <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="style.css">
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
@@ -14,93 +15,211 @@
 
     
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-    
-
-
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
 
 </head>
 <body>
+    <div class="MainContainer">
     <aside>
         <nav>
             <ul>
                 <li>
-                   
-                        <div className="sidebar-icon">
+                   <a href="/">
+                        <div class="sidebar-icon">
                            
                         </div>
                         <span>Dashboard</span>
-                   
+                    </a>
                 </li>
             </ul>
         </nav>
-
-        <hr></hr>
-
+    
+        <hr>
+    
         <nav>
             <ul>
                 <li>
+                    <a href="ativos.html">
                     
-                        <div className="sidebar-icon">
+                        <div class="sidebar-icon">
                             
                         </div>
                         Ativos
-                    
+                    </a>
                 </li>
                 <li>
-                    
-                        <div className="sidebar-icon">
+                    <a href="transacao.html">
+                        <div class="sidebar-icon">
                              
                         </div>
                         <span>Transação</span>
-                    
+                    </a>
                 </li>
                 <li>
-                    
-                        <div className="sidebar-icon">
+                    <a href="proventos.html">
+                        <div class="sidebar-icon">
                                                 
                         </div>
                         <span>Dividendo</span>
-                        
+                    </a> 
                     
                 </li>
-
+    
             </ul>
         </nav>
-
-       
-
-        <nav>
+    
+        
+    
+        <nav style="margin-top: auto;">
             <ul>
                 <li>
-                    
-                        <div className="sidebar-icon">                      
+                    <a href="">
+                        <div class="sidebar-icon">                      
+                                                 
+                        </div>
+                        <span>Imposto de Renda</span>                    
+                    </a> 
+                </li>
+                <li>
+                    <a href="">
+                        <div class="sidebar-icon">                      
                                                  
                         </div>
                         <span>Configuração</span>                    
-                    
+                    </a> 
                 </li>
             </ul>
         </nav>
+    
 
-
-        
     </aside>
 
-    <h1>Dados da Planilha</h1>
-    <div id="tabela"></div>
-    <h2>Crescimento do Patrimônio</h2>
-    <canvas id="graficoPatrimonio" width="400" height="200"></canvas>
-    <canvas id="graficoTipo" width="400" height="200"></canvas>
-    <canvas id="graficoSegmento" width="400" height="200"></canvas>
-    <canvas id="graficoProventos" width="400" height="200"></canvas>
+    <main>
+        <Header></Header>
 
-    <script type="module" src="dados.js"></script>
-    <script type="module" src="script.js"></script>
+        <div>
+            <div class="dashboard-screen">
+            
+
+                <div class="grid-container">
+                    <div class="card">
+                        <h4>Valor Aplicado</h4>
+                        <span>R$ <span id="valor-aplicado-text"></span></span>
+                    </div>
+                    <div class="card">
+                        <h4>Valor Patrimonial</h4>
+                        <span>R$ 00.000,00</span>
+                    </div>
+                    <div class="card">
+                        <h4>Variação Patrimonial</h4>
+                        
+                        <span>12,50%</span>
+                    </div>
+                    <div class="card">
+                        <h4>Dividend Yield</h4>
+                        
+                        <span>0,95%</span>
+                    </div>
+    
+                    <div class="card evolucao-patrimonial">
+                        <h4>Valor Patrimonial</h4>
+                        <p>Evolução de Valor Patrimonial</p>
+                        <div class="grafico-patrimonio">
+                            <canvas id="graficoPatrimonio"></canvas>
+                        </div>
+                    </div>
+                    <div class="card categoria-patrimonial">
+                        <h4>Valor Patrimonial</h4>
+                        <p>Distribuição do Patrimônio por Segmento</p>
+                        <div class="grafico-tipo">
+
+                            <canvas id="graficoTipo"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="card card-proventos">
+                        <h4>Proventos</h4>
+                        <p>Proventos por Tipo de Provento</p>
+                        <div class="proventos">
+                            <div class="grafico-proventos">
+        
+                                <canvas id="graficoProventos"></canvas>
+                            </div>
+        
+                        </div>
+                    </div>
+
+                    <div class="card valor-segmento-fii">
+                        <h4>Valor por Segmento de FII</h4>
+                        <p>Distribuição do Patrimônio por Segmento por Fundo Imobiliário</p>
+                        <div class="grafico-segmento">
+
+                            <canvas id="graficoSegmentoFII"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="card valor-segmento-acao">
+                        <h4>Valor por Segmento de Ação</h4>
+                        <p>Distribuição do Patrimônio por Segmento por Ação</p>
+                        <div class="grafico-segmento">
+
+                            <canvas id="graficoSegmentoAcao"></canvas>
+                        </div>
+                    </div>
+
+                
+                
+                    <div style="grid-column: 1 / span 4;">
+                        <label for="timeFilter">Filtro de Tempo:</label>
+                        <select id="timeFilter">
+                            <option value="monthly">Mensal</option>
+                            <option value="annual">Anual</option>
+                        </select>
+                
+                        <label for="typeFilter">Tipo de Operação:</label>
+                        <select id="typeFilter">
+                            <option value="all">Todos</option>
+                            <option value="Rendimento">Rendimento</option>
+                            <option value="JCP">JCP</option>
+                        </select>
+                
+                        <label for="ticketFilter">Filtrar por Ticket:</label>
+                        <select id="ticketFilter">
+                            <!-- As opções serão preenchidas dinamicamente pelo JavaScript -->
+                        </select>
+                
+                        <!-- Adicione um select para o filtro de tipo de Ticket -->
+                        <label for="tipoTicketFilter">Tipo de Ticket:</label>
+                        <select id="tipoTicketFilter">
+                        <option value="all">Todos</option>
+                        </select>               
+                
+                
+                        <button id="applyFilters">Aplicar Filtros</button>
+                    </div>
+                </div>
+                
+                           
+                
+            </div>
+            
+        </div>
+        
+    </main>
+</div>
+    
+
+    <style>
+
+
+
+    </style>
+
+<script type="module" src="dados.js"></script>
+<script type="module" src="script.js"></script>
+<script type="module" src="scriptProventos.js"></script>
+    
+    
 </body>
 </html>
 
-
-<style>
-    
-</style>

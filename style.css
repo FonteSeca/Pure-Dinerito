@@ -352,6 +352,10 @@ table {
           text-transform: uppercase;
           
           text-align: center;
+          a {
+            color: rgba(32,32,32, 0.4);
+            text-decoration: none;
+          }
       }
   }
 
@@ -718,4 +722,26 @@ canvas {
   .card-proventos, .valor-segmento-fii, .valor-segmento-acao {
     grid-column: auto;
   }
+}
+
+#tabela-carteira table tr td:first-child a {
+  display: flex;
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  text-align: left;
+
+  .symbol-ticket {
+    margin-right: 10px;
+  }
+}
+
+.symbol-ticket {
+  height: 40px;
+  width: 40px;
+  background-color: rgba(32, 32, 32, 0.1);
+  border-radius: 25px;
+  display: flex;
+  justify-content: center;
+    align-items: center;
 }

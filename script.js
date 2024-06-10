@@ -68,7 +68,7 @@ function verifica() {
     }
     
     if (checkElementById('tabela-transacao') === true) {
-        renderTableTransacao(globalData.movimentacao, 'tabela-transacao');
+        // renderTableTransacao(globalData.movimentacao, 'tabela-transacao');
     }
     
     if (checkElementById('tabela-proventos') === true) {
@@ -264,6 +264,7 @@ async function renderTableCarteira(data, idElemento) {
         <thead>
             <tr>
             <th>Ticker</th>
+            <th>Tipo</th>
             <th>Quantidade</th>
             <th>Preço Médio</th>
             <th>Valor Aplicado</th>
@@ -290,7 +291,13 @@ async function renderTableCarteira(data, idElemento) {
 
         const row = document.createElement('tr');
         row.innerHTML = `
-        <td>${item['Ticket']} - ${item['nome_ticker']}</td>
+        <td>
+            <a href="/ativos/${item['Ticket']}" target="_blank">
+                <span class="symbol-ticket">${item['Ticket'].slice(0, 2)}</span>
+                ${item['Ticket']} - ${item['nome_ticker']}
+            </a>
+        </td>
+        <td>${item['Tipo']}</td>
         <td>${item['Cotas Adquiridas']}</td>
         <td>R$ ${precoMedio.toFixed(2)}</td>
         <td>R$ ${valorPago}</td>
