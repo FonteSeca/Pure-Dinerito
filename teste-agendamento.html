@@ -1,0 +1,1130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulário com Botões de Escolha</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="caixa-agendamento">
+
+        <div class="progress-bar">
+            <div class="progress-step active">Dados Pessoais</div>
+            <div class="progress-step">Especialidade Médica</div>
+            <div class="progress-step">Convênio</div>
+            <div class="progress-step">Preferência de Agendamento</div>
+            <div class="progress-step">Revisar</div>
+            <div class="progress-step">Agendar</div>
+          </div>
+          
+    
+    <form class="form-agendamento">
+        <div class="etapa-dados-pessoais">
+            <div class="sub-etapa etapa-nome-completo ativa">
+                <h3>Qual é o seu nome?</h3>
+                <input type="text" id="nome-completo" name="nome-completo" placeholder="Digite seu nome completo">
+            </div>
+
+            <div class="sub-etapa etapa-data-nascimento">
+                <h3>Qual é a sua data de nascimento?</h3>
+                <input type="date" id="data-nascimento" name="data-nascimento">
+            </div>
+
+            <div class="sub-etapa etapa-genero">
+                <h3>Qual é o seu gênero?</h3>
+                <div class="choice-options">
+                    <div class="choice">
+                        <input type="radio" id="genero-masculino" name="genero" value="Masculino">
+                        <label for="genero-masculino">
+                            <img src="EXAME-IMAGEM.png" alt="Masculino">
+                            <span>Masculino</span>
+                        </label>
+                    </div>
+                    <div class="choice">
+                        <input type="radio" id="genero-feminino" name="genero" value="Feminino">
+                        <label for="genero-feminino">
+                            <img src="EXAME-IMAGEM.png" alt="Feminino">
+                            <span>Feminino</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="sub-etapa etapa-numero-celular">
+                <h3>Poderia me fornecer o seu número de contato?</h3>
+                <input type="tel" id="numero-celular" name="numero-celular" placeholder="Digite seu telefone">
+            </div>
+
+            <div class="sub-etapa etapa-email">
+                <h3>Qual é o seu endereço de email?</h3>
+
+                
+
+                <input type="email" id="email" name="email" placeholder="Digite seu e-mail">
+                
+                
+                
+            </div>
+
+
+        </div>
+
+        <div class="etapa-especialidade-medica">
+            <div class="sub-etapa etapa-tipo-consulta">                
+                <h3>Por favor, selecione o tipo de consulta desejada.</h3>
+                <div class="choice-options">
+                    <div class="choice">
+                        <input type="radio" id="consulta-especialidade" name="tipo-consulta" value="Especialidade">
+                        <label for="consulta-especialidade">
+                            <img src="EXAME-IMAGEM.png" alt="Especialidade">
+                            <span>Especialidade</span>
+                        </label>
+                    </div>
+                    <div class="choice">
+                        <input type="radio" id="consulta-exame" name="tipo-consulta" value="Exame">
+                        <label for="consulta-exame">
+                            <img src="EXAME-IMAGEM.png" alt="Exame">
+                            <span>Exame</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="sub-etapa etapa-especialidade especialidade">
+                <h3>Escolha a especialidade médica desejada.</h3>
+                <select id="especialidade-medica-especialidade" name="especialidade-medica-especialidade">
+
+                </select>
+            </div>
+
+            <div class="sub-etapa etapa-exame exame">
+                <h3>Selecione o exame que você precisa.</h3>
+                <select id="especialidade-medica-exame" name="especialidade-medica-exame">
+            
+                </select>
+            </div>
+        </div>
+
+        <div class="etapa-convenio">
+            <div class="sub-etapa etapa-tipo-pagamento">
+                <h3>Você possui algum plano de saúde?</h3>
+                <div class="choice-options">
+                
+                    <div class="choice">
+                        <input type="radio" id="particular" name="tipo-pagamento" value="Particular">
+                        <label for="particular">
+                            <img src="EXAME-IMAGEM.png" alt="Particular">
+                            <span>Particular</span>
+                        </label>
+                    </div>
+                    <div class="choice">
+                        <input type="radio" id="plano-saude" name="tipo-pagamento" value="Plano de Saúde">
+                        <label for="plano-saude">
+                            <img src="EXAME-IMAGEM.png" alt="Plano de Saúde">
+                            <span>Plano de Saúde</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="sub-etapa etapa-plano-saude plano-saude">
+                <h3>Qual é o nome do seu plano de saúde?</h3>
+                <select id="plano-saude-nome" name="plano-saude-nome">
+        
+                </select>
+            </div>
+        </div>
+
+        <div class="etapa-preferencia-agendamento">
+            <div class="sub-etapa etapa-dia-semana">
+                <h3>Em qual dia da semana você prefere a consulta?</h3>
+                <div class="choice-options choice-days">
+                    <div class="choice">
+                        <input type="radio" id="segunda-feira" name="dia-semana" value="Segunda-feira">
+                        <label for="segunda-feira">
+                            <span>Segunda-Feira</span>
+                        </label>
+                    </div>
+                    <div class="choice">
+                        <input type="radio" id="terca-feira" name="dia-semana" value="Terça-feira">
+                        <label for="terca-feira">
+                            <span>Terça-Feira</span>
+                        </label>
+                    </div>
+                    <div class="choice">
+                        <input type="radio" id="quarta-feira" name="dia-semana" value="Quarta-feira">
+                        <label for="quarta-feira">
+                            <span>Quarta-Feira</span>
+                        </label>
+                    </div>
+                    <div class="choice">
+                        <input type="radio" id="quinta-feira" name="dia-semana" value="Quinta-feira">
+                        <label for="quinta-feira">
+                            <span>Quinta-Feira</span>
+                        </label>
+                    </div>
+                    <div class="choice">
+                        <input type="radio" id="sexta-feira" name="dia-semana" value="Sexta-feira">
+                        <label for="sexta-feira">
+                            <span>Sexta-Feira</span>
+                        </label>
+                    </div>
+                    <div class="choice">
+                        <input type="radio" id="sabado" name="dia-semana" value="Sábado">
+                        <label for="sabado">
+                            <span>Sábado</span>
+                        </label>
+                    </div>
+                </div>
+                
+            </div>
+
+            <div class="sub-etapa etapa-turno-dia">
+                <h3>Qual é o melhor horário para você?</h3>
+                <div class="choice-options">
+                    <div class="choice">
+                        <input type="radio" id="turno-manha" name="turno-dia" value="Manha - 8h até 13h">
+                        <label for="turno-manha">
+                            <img src="EXAME-IMAGEM.png" alt="Manhã">
+                            <span>Manhã</span>
+                            <span>8h às 13h</span>
+                        </label>
+                    </div>
+                    <div class="choice">
+                        <input type="radio" id="turno-tarde" name="turno-dia" value="Tarde - 14h até 19h">
+                        <label for="turno-tarde">
+                            <img src="EXAME-IMAGEM.png" alt="Tarde">
+                            <span>Tarde</span>
+                            <span>14h até 19h</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="sub-etapa etapa-revisao revisao">
+                <h3>Revisão</h3>
+                <div class="revisao-info">
+                </div>
+                <h2>Está tudo certo com as informações?</h2>
+                
+            </div>
+
+            <div class="sub-etapa etapa-concluido">
+                <h3>Concluído</h3>
+                
+
+            </div>
+        </div>
+        <hr>
+        <div class="botoes">
+            <button class="button button-white" id="previousButton" type="button">Anterior</button>
+            <button class="button button-red" id="nextButton" type="button">Próximo</button>
+            <button class="button button-red" id="agendar" type="button" onclick="enviarWhatsApp()" style="display: none;">Entrar em Contato</button>
+        </div>
+    </form>
+</div>
+
+
+
+    <script>
+        // Objeto contendo todas as sub-etapas
+        const SUB_ETAPAS = {
+            NOME_COMPLETO: 'etapa-nome-completo',
+            DATA_NASCIMENTO: 'etapa-data-nascimento',
+            GENERO: 'etapa-genero',
+            NUMERO_CELULAR: 'etapa-numero-celular',
+            EMAIL: 'etapa-email',
+            TIPO_CONSULTA: 'etapa-tipo-consulta',
+            ESCOLHA_ESPECIALIDADE: 'etapa-especialidade',
+            ESCOLHA_EXAME: 'etapa-exame',
+            TIPO_PAGAMENTO: 'etapa-tipo-pagamento',
+            PLANO_SAUDE: 'etapa-plano-saude',
+            DIA_SEMANA: 'etapa-dia-semana',
+            TURNO_DIA: 'etapa-turno-dia',
+            REVISAO: 'etapa-revisao',
+            CONCLUIDO: 'etapa-concluido'
+        };
+
+        let nomeCompleto = '';
+        let dataNascimento = '';
+        let celular = '';
+        let email = '';
+        let idade = '';
+        let genero = '';
+        let tipoConsulta = '';
+        let nomeConsulta = '';
+        let tipoPagamento = '';
+        let nomePlanoSaude = '';
+        let diaDaSemana = '';
+        let turnoDoDia = '';
+    
+document.addEventListener('DOMContentLoaded', (event) => {
+
+    const querySubEtapas = document.querySelectorAll('.sub-etapa');
+        const subEtapasMap = {};
+
+        querySubEtapas.forEach((etapa, index) => {
+            const className = etapa.classList[1]; // Obtém a segunda classe (a específica para cada sub-etapa)
+            subEtapasMap[className] = index; // Associa a classe ao índice + 1 (para começar de 1)
+        });
+
+        console.log(subEtapasMap);
+
+        let currentStep = 0;
+        const totalSteps = Object.keys(SUB_ETAPAS).length;
+
+        function showStep(stepIndex) {
+            Object.values(SUB_ETAPAS).forEach((step, index) => {
+                const element = document.querySelector(`.${step}`);
+                if (element) {
+                    if (index === stepIndex) {
+                        element.style.display = 'block';
+                        console.log(`Exibindo etapa: ${step}`);
+                    } else {
+                        element.style.display = 'none';
+                    }
+                }
+            });
+        }
+
+        function goToStep(stepName) {
+            if (subEtapasMap[stepName] !== undefined) {
+                currentStep = subEtapasMap[stepName];
+                showStep(currentStep);
+            } else {
+                console.error('Sub-etapa não encontrada:', stepName);
+            }
+        }
+
+        function determineNextStep() {
+            const currentStepName = Object.keys(SUB_ETAPAS)[currentStep];
+            if (currentStepName === 'NOME_COMPLETO') {
+                const inputNome = document.querySelector('input[name="nome-completo"]');
+                if (!inputNome.value) {
+                    alert('Por favor, digite seu nome completo.');
+                    return; // Não avãra se o campo de nome estiver vazio
+                } else {
+                    nomeCompleto = inputNome.value;
+                    goToStep(SUB_ETAPAS.DATA_NASCIMENTO);
+                    return;
+                }
+            } else if (currentStepName === 'DATA_NASCIMENTO') {
+                const inputData = document.querySelector('input[name="data-nascimento"]');
+                if (!inputData.value) {
+                    alert('Por favor, informe sua data de nascimento.');
+                    return; // Não avãra se o campo de nome estiver vazio
+                } else {
+                    dataNascimento = formatarData(inputData.value);
+
+                    // Obter a data de nascimento do input e dividir em ano, mês e dia
+                    const [ano, mes, dia] = inputData.value.split('-');
+
+                    // Calcular a data atual
+                    const hoje = new Date();
+                    const anoAtual = hoje.getFullYear();
+                    const mesAtual = hoje.getMonth() + 1; // O mês é baseado em zero, então precisamos adicionar 1
+                    const diaAtual = hoje.getDate();
+
+                    // Calcular a idade
+                    idade = anoAtual - ano;
+
+                    // Verificar se já fez aniversário este ano
+                    if (mesAtual < mes || (mesAtual === mes && diaAtual < dia)) {
+                        idade--;
+                    }
+
+                    console.log(`Idade calculada: ${idade} anos`);
+                    goToStep(SUB_ETAPAS.GENERO);
+                    return;
+                }
+            } else if (currentStepName === 'GENERO') {
+                const inputGenero = document.querySelector('input[name="genero"]:checked');
+                if (!inputGenero) {
+                    alert('Por favor, informe seu genero.');
+                    return; // Não avãra se o campo de nome estiver vazio
+                } else {
+                    genero = inputGenero.value;
+                    goToStep(SUB_ETAPAS.NUMERO_CELULAR);
+                    return;
+                }
+            } else if (currentStepName === 'NUMERO_CELULAR') {
+                const inputCelular = document.querySelector('input[name="numero-celular"]');
+                if (!inputCelular.value) {
+                    alert('Por favor, informe seu telefone.');
+                    return; // Não avãra se o campo de nome estiver vazio
+                } else {
+                    celular = inputCelular.value;
+                    updateProgress('next');
+                    goToStep(SUB_ETAPAS.EMAIL);
+                    return;
+                }
+            } else if (currentStepName === 'EMAIL') {
+                const inputEmail = document.querySelector('input[name="email"]');
+                if (!inputEmail.value) {
+                    alert('Por favor, informe seu email.');
+                    return; // Não avãra se o campo de nome estiver vazio
+                } else {
+                    email = inputEmail.value;
+                    updateProgress('next');
+                    goToStep(SUB_ETAPAS.TIPO_CONSULTA);
+                    return;
+                }               
+            } else if (currentStepName === 'TIPO_CONSULTA') {
+                const inputConsulta = document.querySelector('input[name="tipo-consulta"]:checked');
+                if (!inputConsulta) {
+                    alert('Por favor, selecione o tipo de consulta desejada.');
+                    return; // Não avança se nenhum tipo de consulta for selecionado
+                } else if (inputConsulta.value === 'Especialidade') {
+                    tipoConsulta = 'Especialidade';
+                    goToStep(SUB_ETAPAS.ESCOLHA_ESPECIALIDADE);
+                    return;
+                } else if (inputConsulta.value === 'Exame') {
+                    tipoConsulta = 'Exame';
+                    goToStep(SUB_ETAPAS.ESCOLHA_EXAME);
+                    return;
+                }
+            } else if (currentStepName === 'ESCOLHA_ESPECIALIDADE') {
+                const selectEspecialidade = document.querySelector('select[name="especialidade-medica-especialidade"]');
+                const inputEspecialidade = selectEspecialidade ? selectEspecialidade.value : '';
+                if (!inputEspecialidade) {
+                    alert('Por favor, selecione uma especialidade.');
+                    return; // Não avãra se nenhuma especialidade for selecionada
+                } else {
+                    nomeConsulta = inputEspecialidade;
+                    updateProgress('next');
+                    goToStep(SUB_ETAPAS.TIPO_PAGAMENTO);
+                    return;
+                }
+            } else if (currentStepName === 'ESCOLHA_EXAME') {
+                const selectExame = document.querySelector('select[name="especialidade-medica-exame"]');
+                const inputExame = selectExame ? selectExame.value : '';
+                if (!inputExame) {
+                    alert('Por favor, selecione um exame.');
+                    return; // Não avãra se nenhum exame for selecionado
+                } else {
+                    nomeConsulta = inputExame;
+                    updateProgress('next');
+                    goToStep(SUB_ETAPAS.TIPO_PAGAMENTO);
+                    return;
+                }                
+            } else if (currentStepName === 'TIPO_PAGAMENTO') {
+                const inputTipoPagamento = document.querySelector('input[name="tipo-pagamento"]:checked');
+                if (!inputTipoPagamento) {
+                    alert('Por favor, selecione o tipo de pagamento desejado.');
+                    return; // Não avãra se nenhum tipo de pagamento for selecionado
+                } else if (inputTipoPagamento.value === 'Particular') {
+                    tipoPagamento = 'Particular';
+                    updateProgress('next');
+                    goToStep(SUB_ETAPAS.DIA_SEMANA);
+                    return;
+                } else if (inputTipoPagamento.value === 'Plano de Saúde') {
+                    tipoPagamento = 'Plano de Saúde';
+                    goToStep(SUB_ETAPAS.PLANO_SAUDE);
+                    return;
+                }
+            } else if (currentStepName === 'PLANO_SAUDE') {
+                const selectPlanoSaude = document.querySelector('select[name="plano-saude-nome"]');
+                const inputPlanoSaude = selectPlanoSaude ? selectPlanoSaude.value : '';
+                if (!inputPlanoSaude) {
+                    alert('Por favor, selecione o plano de saude desejado.');
+                    return; // Não avãra se nenhum tipo de pagamento for selecionado
+                } else {
+                    nomePlanoSaude = inputPlanoSaude;
+                    updateProgress('next');
+                    goToStep(SUB_ETAPAS.DIA_SEMANA);
+                    return;
+                }
+            } else if (currentStepName === 'DIA_SEMANA') {
+                const inputDiaSemana = document.querySelector('input[name="dia-semana"]:checked');
+                if (!inputDiaSemana) {
+                    alert('Por favor, selecione o dia da semana desejado.');
+                    return; // Não avãra se nenhum tipo de pagamento for selecionado
+                } else {
+                    diaDaSemana = inputDiaSemana.value;
+                    goToStep(SUB_ETAPAS.TURNO_DIA);
+                    return;
+                }
+            } else if (currentStepName === 'TURNO_DIA') {
+                const inputTurnoDia = document.querySelector('input[name="turno-dia"]:checked');
+                if (!inputTurnoDia) {
+                    alert('Por favor, selecione o turno do dia desejado.');
+                    return; // Não avãra se nenhum tipo de pagamento for selecionado
+                } else {
+                    document.getElementById('nextButton').style.display = 'none';
+
+                    document.getElementById('agendar').style.display = 'block';
+
+                    // Obter o valor do input e armazenar no turnoDoDia
+                    turnoDoDia = inputTurnoDia.value;
+                    updateProgress('next');
+                    atualizarRevisao();
+                    goToStep(SUB_ETAPAS.REVISAO);
+
+                    console.log('Nome Completo: ' + nomeCompleto);
+                    console.log('Data de Nascimento: ' + dataNascimento);
+                    console.log('Idade: ' + idade);
+                    console.log('Genero: ' + genero);
+                    console.log('Celular: ' + celular);
+                    console.log('Email: ' + email);
+                    console.log('Tipo de Consulta: ' + tipoConsulta);
+                    console.log('Nome da Consulta: ' + nomeConsulta);
+                    console.log('Tipo de Pagamento: ' + tipoPagamento);
+                    console.log('Plano de Saude: ' + nomePlanoSaude);
+                    console.log('Dia da Semana: ' + diaDaSemana);
+                    console.log('Turno do Dia: ' + turnoDoDia);
+
+                    return;
+                }                
+            }
+
+            currentStep++;
+            if (currentStep < totalSteps) {
+                showStep(currentStep);
+            } else {
+                console.log('Você atingiu a última etapa.');
+            }
+        }
+
+        function determinePreviousStep() {
+            const currentStepName = Object.keys(SUB_ETAPAS)[currentStep];
+            if (currentStepName === 'TIPO_CONSULTA') {
+                updateProgress('previous');
+            } else if (currentStepName === 'ESCOLHA_ESPECIALIDADE') {
+                goToStep(SUB_ETAPAS.TIPO_CONSULTA);
+                return;
+            } else if (currentStepName === 'ESCOLHA_EXAME') {
+                goToStep(SUB_ETAPAS.TIPO_CONSULTA);
+                return;
+                
+            } else if (currentStepName === 'TIPO_PAGAMENTO') {
+                if (tipoConsulta === 'Especialidade') {
+                    goToStep(SUB_ETAPAS.ESCOLHA_ESPECIALIDADE);
+                    updateProgress('previous');
+                    return;
+                } else if (tipoConsulta === 'Exame') {
+                    goToStep(SUB_ETAPAS.ESCOLHA_EXAME);
+                    updateProgress('previous');
+                    return;
+                }
+            } else if (currentStepName === 'DIA_SEMANA') {
+                if (tipoPagamento === 'Particular') {
+                    goToStep(SUB_ETAPAS.TIPO_PAGAMENTO);
+                    updateProgress('previous');
+                    return;
+                } else if (tipoPagamento === 'Plano de Saúde') {
+                    goToStep(SUB_ETAPAS.PLANO_SAUDE);
+                    updateProgress('previous');
+                    return;
+                }
+            } else if (currentStepName === 'REVISAO') {
+                document.getElementById('nextButton').style.display = 'block';
+
+                document.getElementById('agendar').style.display = 'none';
+                updateProgress('previous');
+                goToStep(SUB_ETAPAS.TURNO_DIA);
+                return;
+            }
+
+            currentStep--;
+            if (currentStep >= 0) {
+                showStep(currentStep);
+            } else {
+                console.log('Você está na primeira etapa.');
+            }
+        }
+
+        function goToPreviousStep() {
+            currentStep--;
+            if (currentStep >= 0) {
+                showStep(currentStep);
+            } else {
+                console.log('Você está na primeira etapa.');
+            }
+        }
+
+        // Event listener para o botão "Próximo"
+        document.getElementById('nextButton').addEventListener('click', determineNextStep);
+
+        // Event listener para o botão "Anterior"
+        document.getElementById('previousButton').addEventListener('click', determinePreviousStep);
+
+        // Exibir a primeira etapa ao carregar a página
+        showStep(currentStep);
+
+
+        // Função para formatar a data
+        function formatarData(data) {
+            // Verifica se a data está no formato esperado
+            if (data.match(/^\d{4}-\d{2}-\d{2}$/)) {
+                // Divide a string da data em partes (ano, mês, dia)
+                const partes = data.split("-");
+                // Formata a data no formato desejado
+                return `${partes[2]}/${partes[1]}/${partes[0]}`;
+            } else {
+                // Retorna a data original se não estiver no formato esperado
+                return data;
+            }
+        }
+
+       
+
+
+
+
+
+
+    // Array de especialidades
+    const especialidades = [
+        "Alergologia Adulto",
+        "Alergologia Pediátrico",
+        "Angiologia Adulto",
+        "Angiologia Pediátrico",
+        "Cardiologia Adulto",
+        "Cardiologia Pediátrico",
+        "Cirurgia Geral",
+        "Cirurgia Vascular",
+        "Clínica Médica",
+        "Dermatologia Adulto",
+        "Dermatologia Pediátrico",
+        "Endocrinologia",
+        "Gastroenterologia Adulto",
+        "Gastroenterologia Pediátrica",
+        "Geriatria",
+        "Ginecologia Adulto",
+        "Ginecologia Pediátrico",
+        "Hematologia",
+        "Homeopatia Adulto",
+        "Homeopatia Pediátrico",
+        "Infectologia",
+        "Mastologia Adulto",
+        "Mastologia Pediátrico",
+        "Neurologia Adulto",
+        "Obstetrícia",
+        "Ortopedia Adulto",
+        "Ortopedia Pediátrica",
+        "Otorrinolaringologia Adulto",
+        "Otorrinolaringologia Pediátrica",
+        "Pediatria",
+        "Pneumologia Adulto",
+        "Pneumologia Pediátrico",
+        "Proctologia",
+        "Psiquiatria Adulto",
+        "Psiquiatria Pediátrica",
+        "Reumatologia Adulto",
+        "Urologia Adulto",
+        "Urologia Pediátrica"
+    ];
+   // Seleciona o elemento <select> pelo ID
+    const selectEspecialidades = document.getElementById('especialidade-medica-especialidade');
+
+    // Limpa todas as opções existentes no <select>
+        selectEspecialidades.innerHTML = '';
+
+    // Adiciona as opções do array em cada <select> individualmente
+    especialidades.forEach(especialidade => {
+        const option = document.createElement('option');
+        option.value = especialidade;
+        option.textContent = especialidade;
+        selectEspecialidades.appendChild(option);
+    });
+
+    const exames = [
+        "Biópsia de colo de útero",
+        "Biópsia de mama",
+        "Biópsia de linfonodos",
+        "Biópsia nasal",
+        "Biópsia de próstata",
+        "Citologia",
+        "Colposcopia",
+        "Colonoscopia",
+        "Doppler angiológico",
+        "Ecocardiograma adulto",
+        "Ecocardiograma pediátrico",
+        "Eletrocardiograma",
+        "Eletroencefalograma",
+        "Endoscopia digestiva",
+        "Espirometria",
+        "Exames laboratoriais",
+        "Holter 24h",
+        "Infiltração em músculos, articulações e tendões",
+        "Inserção ou retirada de DIU",
+        "Ligadura elástica de hemorroida",
+        "Mamografia",
+        "Mapa 24h",
+        "Patologia",
+        "Raio-X",
+        "Retossigmoidoscopia",
+        "Risco cirúrgico",
+        "Teste ergométrico (esforço)",
+        "Teste alérgico (prick-test)",
+        "Tomografia",
+        "Tomografia cone beam",
+        "Ultrassonografia",
+        "Urodinâmica",
+        "Urofluxometria",
+        "Vaginoscopia",
+        "Vulvoscopia",
+        "Videolaringoscopia",
+        "Videonasosinusal"
+    ];
+
+    // Seleciona o elemento <select> pelo ID
+    const selectExames = document.getElementById('especialidade-medica-exame');
+
+    // Limpa todas as opções existentes no <select>
+    selectExames.innerHTML = '';
+
+    // Adiciona as opções do array em cada <select> individualmente
+    exames.forEach(exame => {
+        const option = document.createElement('option');
+        option.value = exame;
+        option.textContent = exame;
+        selectExames.appendChild(option);
+    });
+
+
+
+
+    const planosSaude = [
+        "Bradesco Saúde",
+        "Fundação Saúde Itaú",
+        "Porto Seguro Saúde",
+        "Mediservice",
+        "Life Empresarial",
+        "BC Saúde",
+        "Real Grandeza",
+        "CNEN",
+        "CASSI",
+        "CAE Polícia Federal Saúde",
+        "Plan-Assiste",
+        "GEAP Saúde",
+        "Care Plus",
+        "Hospital Central da Aeronáutica - HCA",
+        "Centro de Aquisições Específicas - CAE",
+        "CABERJ",
+        "Integral Saúde",
+        "IpaleRJ Saúde",
+        "CAARJ",
+        "AAFBB",
+        "Nuclep",
+        "Ambep",
+        "SOS-CP",
+        "Proasa"
+    ];
+
+    const selectPlanoSaude = document.getElementById('plano-saude-nome');
+
+    selectPlanoSaude.innerHTML = '';
+
+    planosSaude.forEach(plano => {
+        const option = document.createElement('option');
+        option.value = plano;
+        option.textContent = plano;
+        selectPlanoSaude.appendChild(option);
+    });
+
+
+
+
+});
+
+        function enviarWhatsApp() {
+            // Formatar a mensagem para o WhatsApp
+            let tipoPagamentoTexto = '';
+            if (tipoPagamento.toLowerCase() === 'particular') {
+                tipoPagamentoTexto = 'Particular';
+            } else if (tipoPagamento.toLowerCase() === 'plano de saúde') {
+                tipoPagamentoTexto = `Plano de Saúde do *${nomePlanoSaude}*`;
+            } else {
+                tipoPagamentoTexto = tipoPagamento.toLowerCase();
+            }
+
+            let tipoConsultaTexto = '';
+            if (tipoConsulta.toLowerCase() === 'especialidade') {
+                tipoConsultaTexto = `uma consulta na especialidade *${nomeConsulta}*`;
+            } else if (tipoConsulta.toLowerCase() === 'exame') {
+                tipoConsultaTexto = `um exame de *${nomeConsulta}*`;
+            } else {
+                tipoConsultaTexto = tipoConsulta.toLowerCase();
+            }
+
+            const textoWhatsApp = `Olá! 😊\n\nMeu nome é *${nomeCompleto}*, nasci em *${dataNascimento}* e tenho ${idade} anos. Sou do sexo *${genero.toLowerCase()}*.\n\nGostaria de agendar ${tipoConsultaTexto}, no ${tipoPagamentoTexto}.\n\nTenho preferência por atendimento na ${diaDaSemana.toLowerCase()}, no turno da ${turnoDoDia.toLowerCase()}.\n\n---\n\n🏥 *Especialidade:* ${nomeConsulta}\n💳 *Pagamento:* ${tipoPagamentoTexto}\n📅 *Dia:* ${diaDaSemana}\n🕒 *Turno:* ${turnoDoDia}\n\nPor acaso existe disponibilidade nesse horário? Muito obrigado! 🙏`;
+
+
+            
+            console.log(textoWhatsApp);
+            console.log('Enviando WhatsApp...');
+
+            // URL para abrir o WhatsApp com a mensagem
+            const urlWhatsApp = `https://api.whatsapp.com/send?phone=552135869040&text=${encodeURIComponent(textoWhatsApp)}`;
+
+            // Abrir o WhatsApp em uma nova janela
+            window.open(urlWhatsApp);
+        }
+
+        const inputTelefone = document.getElementById('numero-celular');
+
+        inputTelefone.addEventListener('input', formatarTelefone);
+
+        function formatarTelefone() {
+            let valor = inputTelefone.value.replace(/\D/g, ''); // Remove todos os caracteres não numéricos
+            let formatacao = '';
+
+            if (valor.length > 0) {
+                formatacao = '(' + valor.substring(0, 2) + ') '; // Adiciona o código de área
+            }
+
+            if (valor.length > 2) {
+                formatacao += valor.substring(2, 7) + '-'; // Adiciona os cinco dígitos seguintes e o traço
+            }
+
+            if (valor.length > 7) {
+                formatacao += valor.substring(7, 11); // Adiciona os quatro dígitos finais
+            }
+
+            inputTelefone.value = formatacao;
+        }
+
+
+        const revisaoDiv = document.querySelector('.revisao-info');
+
+    // Função para atualizar os dados na div de revisão
+    function atualizarRevisao() {
+        console.log('Atualizando revisão...');
+        let formaPagamento;
+        if (tipoPagamento === 'Particular') {
+            formaPagamento = 'Particular';
+        } else if (tipoPagamento === 'Plano de Saúde') {
+            formaPagamento = nomePlanoSaude;
+        }
+
+        revisaoDiv.innerHTML = `
+            <div>
+                <span>Nome</span>
+                <span>${nomeCompleto}</span>
+            </div>
+    
+            <div>
+                <span>Data de Nascimento</span>
+                <span>${dataNascimento}</span>
+            </div>
+    
+            <div>
+                <span>Especialidade Escolhida</span>
+                <span>${nomeConsulta}</span>
+            </div>
+    
+            <div>
+                <span>Forma de Pagamento</span>
+                <span>${formaPagamento}</span>
+            </div>
+    
+            <div>
+                <span>Preferência de Dia da Semana</span>
+                <span>${diaDaSemana}</span>
+            </div>
+    
+            <div>
+                <span>Preferência de Horário</span>
+                <span>${turnoDoDia}</span>
+            </div>
+        `;
+    }
+
+
+    let currentStepProgress = 1;
+
+    function updateProgress(action) {
+  const steps = document.querySelectorAll('.progress-step');
+  steps.forEach((step, index) => {
+    if (index + 1 === currentStepProgress) {
+      step.classList.add('active');
+      step.classList.remove('completed');
+      step.classList.remove('pending');
+      step.classList.add('current');
+    } else if (index + 1 < currentStepProgress) {
+      step.classList.remove('active');
+      step.classList.remove('pending');
+      step.classList.remove('current');
+      step.classList.add('completed');
+    } else {
+      step.classList.remove('active');
+      step.classList.remove('completed');
+      step.classList.add('pending');
+      step.classList.remove('current');
+    }
+  });
+
+  if (action === 'next') {
+    if (currentStepProgress < steps.length) {
+        currentStepProgress++;
+      console.log(`Avançou para a etapa ${currentStepProgress}`);
+    }
+  } else if (action === 'previous') {
+    if (currentStepProgress > 1) {
+        currentStepProgress--;
+      console.log(`Voltou para a etapa ${currentStepProgress}`);
+    }
+  }
+}
+
+
+updateProgress();
+
+
+
+
+    </script>
+
+
+    <style>
+.progress-bar {
+    
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f0f0f0; /* Cor de fundo da barra de progresso */
+  border-radius: 5px; /* Borda arredondada para a barra de progresso */
+  padding: 5px; /* Espaçamento interno da barra de progresso */
+}
+
+.progress-step {
+  flex: 1;
+  text-align: center;
+  padding: 10px;
+  color: #888; /* Cor do texto das etapas */
+  transition: background-color 0.3s; /* Transição suave da cor de fundo */
+}
+
+.progress-step.current {
+  color: #000; /* Cor do texto da etapa atual */
+  font-weight: bold; /* Texto em negrito para a etapa atual */
+  background-color: #a7a528; 
+}
+
+.progress-step.completed {
+  background-color: #28a745; /* Cor de fundo das etapas completadas */
+  color: white; /* Cor do texto das etapas completadas */
+}
+
+.progress-step.pending {
+  background-color: #dc3545; /* Cor de fundo das etapas pendentes */
+  color: white; /* Cor do texto das etapas pendentes */
+}
+
+
+
+        .sub-etapa {
+            display: none;
+        }
+        .sub-etapa.ativa {
+            display: block;
+        }
+        .botoes {
+            display: flex;
+            justify-content: space-between;
+        }
+
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #F3F6FA;
+}
+
+form {
+
+    justify-content: space-around;
+    margin: 50px;
+}
+
+.caixa-agendamento {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.form-agendamento {
+    width: 100%;
+    max-width: 700px;
+    background-color: #FFF;
+    border-radius: 15px;
+    padding: 40px;
+
+    h3 {
+        font-family: 'Bitter', serif;
+        font-size: 24px;
+        font-weight: 700;
+        text-align: center;
+    }
+
+    > div {
+
+    }
+}
+
+
+.choice-options {
+    display: flex;
+    justify-content: center;
+}
+
+.choice-days {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    grid-gap: 10px;
+
+    .choice {
+        padding: 0px;
+    }
+
+    .choice input[type="radio"] + label {
+
+        padding: 15px 30px;
+        width: 100%;
+        display: block;
+        text-align: center;
+        box-sizing: border-box;
+    }
+}
+
+.choice {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 2px solid transparent;
+    border-radius: 10px;
+    padding: 0 20px;
+    transition: border-color 0.3s;
+}
+
+.choice input[type="radio"] {
+    display: none;
+}
+
+.choice label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+}
+
+.choice img {
+    width: 100px;  /* Ajuste conforme necessário */
+    height: 100px; /* Ajuste conforme necessário */
+    margin-bottom: 10px;
+}
+
+.choice span {
+    font-size: 16px;
+}
+
+.choice input[type="radio"] + label {
+    border: 3px solid rgba(183, 183, 183, 0); /* Cor da borda quando selecionado */
+    background-color: #EFEFEF;
+    padding: 35px 30px;
+    border-radius: 10px;
+}
+
+.choice input[type="radio"]:checked + label {
+    border: 3px solid rgba(183, 183, 183, 1); /* Cor da borda quando selecionado */
+    border-radius: 10px;
+}
+
+label span:nth-of-type(1) {
+ font-weight: 700;   
+ font-size: 15px;
+}
+label span:nth-of-type(2) {
+    font-weight: 400;   
+}
+
+.revisao-info {
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-gap: 10px;
+    margin-top: 20px;
+
+    > div {
+        display: flex;
+        flex-direction: column;
+        
+        border: 2px solid transparent;
+        border-radius: 10px;
+        transition: border-color 0.3s;
+
+        span:first-child {
+            font-size: 16px;
+            font-weight: 700;
+            padding-bottom: 10px;
+        }
+    }
+}
+
+    </style>
+
+
+
+
+
+<style>
+    hr {
+        margin: 30px 0;
+    }
+*:focus {
+    outline: none;
+}
+
+input, select {
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+}
+    input, select {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 15px 20px 15px 20px;
+    border: none;
+    border-radius: 10px;
+    background-color: #EEEEEE;
+}
+
+    .button {
+    border-radius: 10px;
+    font-weight: 700;
+    display: inline-block;
+    font-size: 15px;
+    padding: 20px 25px;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: 0.3s all;
+    height: auto;
+    cursor: pointer;
+}
+
+.button-red {
+  border: 1px solid #202020;
+  background: #202020;
+  color: #FFF;
+  transition: 0.3s all;
+}
+
+.button-red:hover {
+  background-color: transparent;
+  color: #202020;
+  transition: 0.3s all;
+}
+
+.button-white {
+  border: 1px solid #FFF;
+  background: #EAEAEA;
+  color: #202020;
+  transition: 0.3s all;
+}
+
+.button-white:hover {
+    border: 1px solid #202020;
+  color: #202020;
+  transition: 0.3s all;
+}
+</style>
+</body>
+</html>
